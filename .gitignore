@@ -1,0 +1,7 @@
+node_modules/
+.env
+.gemini/
+uploads/
+.vercel
+.DS_Store
+Thumbs.db

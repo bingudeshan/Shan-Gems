@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shan Gems — Sri Lanka's premier luxury gemstone platform. Buy ethically sourced Ceylon sapphires, Alexandrite, and Padparadscha with GIA/NGJA certification and blockchain-verified Digital Product Passports.">
+  <meta name="keywords" content="Ceylon sapphire, blue sapphire, Padparadscha, Alexandrite, Sri Lanka gems, GIA certified gemstones, luxury gemstones, investment gems, rare gemstones, buy gemstones online Sri Lanka">
+  <meta name="author" content="Sameera Fernando — Shan Gems">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://shangems.com/">
+  <meta name="theme-color" content="#0D0D0D">
+  <title>Shan Gems — Ceylon Sapphires & Rare Gemstones | Ethically Sourced luxury</title>
+
+  <!-- Preload critical font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shangems.com/">
+  <meta property="og:title" content="Shan Gems — Ceylon Sapphires & Rare Gemstones">
+  <meta property="og:description" content="Discover rare, ethically sourced gemstones from Sri Lanka. Blue Sapphires, Alexandrites, and Padparadscha with blockchain traceability.">
+  <meta property="og:image" content="https://shangems.com/images/og-cover.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://shangems.com/">
+  <meta property="twitter:title" content="Shan Gems — Ceylon Sapphires & Rare Gemstones">
+  <meta property="twitter:description" content="Discover rare, ethically sourced gemstones from Sri Lanka. Blue Sapphires, Alexandrites, and Padparadscha with blockchain traceability.">
+  <meta property="twitter:image" content="https://shangems.com/images/og-cover.jpg">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "JewelryStore",
+    "name": "Shan Gems",
+    "image": "https://shangems.com/images/shan-gems-logo.jpg",
+    "@id": "https://shangems.com",
+    "url": "https://shangems.com",
+    "telephone": "+94777866799",
+    "priceRange": "$$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "No.49/1, 1st Lane, Horetuduwa",
+      "addressLocality": "Moratuwa",
+      "addressCountry": "LK"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 6.7725,
+      "longitude": 79.8856
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "sameAs": [
+      "https://www.facebook.com/shangems",
+      "https://www.instagram.com/shangems"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     PAGE LOADER
+═══════════════════════════════════════════════════════ -->
+<div class="page-loader" id="pageLoader" aria-hidden="true">
+  <div class="page-loader__gem">💎</div>
+  <div class="page-loader__text">Shan Gems</div>
+  <div class="page-loader__bar"><div class="page-loader__bar-fill"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════════════════ -->
+<nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <!-- Logo -->
+    <a href="#" class="nav__logo" aria-label="Shan Gems — Home">
+      <img src="images/shan-gems-logo.jpg" alt="Shan Gems" class="nav__logo-img" loading="lazy">
+    </a>
+
+    <!-- Desktop Links -->
+    <ul class="nav__links" role="list">
+      <li class="nav__dropdown">
+        <a href="#categoriesSection" class="nav__link">Sapphire ▾</a>
+        <div class="nav__dropdown-menu" role="menu">
+          <a href="#" class="nav__dropdown-item" role="menuitem">Blue Sapphire</a>
+          <a href="#" class="nav__dropdown-item" role="menuitem">Yellow Sapphire</a>
+          <a href="#" class="nav__dropdown-item" role="menuitem">Pink Sapphire</a>
+          <a href="#" class="nav__dropdown-item" role="menuitem">Padparadscha</a>
+        </div>
+      </li>
+      <li class="nav__dropdown">
+        <a href="#categoriesSection" class="nav__link">Jewellery ▾</a>
+        <div class="nav__dropdown-menu" role="menu">
+          <a href="#" class="nav__dropdown-item" role="menuitem">Rings</a>
+          <a href="#" class="nav__dropdown-item" role="menuitem">Pendants</a>
+          <a href="#" class="nav__dropdown-item" role="menuitem">Earrings</a>
+          <a href="#" class="nav__dropdown-item" role="menuitem">Bracelets</a>
+        </div>
+      </li>
+      <li><a href="products.html" class="nav__link">Shop</a></li>
+      <li><a href="#trustSection" class="nav__link">Provenance</a></li>
+      <li><a href="#footer" class="nav__link">Contact</a></li>
+    </ul>
+
+    <!-- Actions -->
+    <div class="nav__actions">
+      <!-- Currency -->
+      <select class="nav__currency-select" id="currencySelector" aria-label="Select currency">
+        <option value="USD">USD ($)</option>
+        <option value="LKR">LKR (Rs)</option>
+        <option value="EUR">EUR (€)</option>
+        <option value="GBP">GBP (£)</option>
+        <option value="JPY">JPY (¥)</option>
+      </select>
+      <!-- Search -->
+      <button class="nav__search-btn" id="searchBtn" aria-label="Open search">
+        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path stroke-linecap="round" d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <!-- Cart -->
+      <button class="nav__icon-btn" id="cartBtn" aria-label="Open cart">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+        <span class="nav__cart-count" id="cartCount">0</span>
+      </button>
+      <!-- Mobile hamburger -->
+      <button class="nav__menu-btn" id="menuBtn" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════
+     STATS TICKER BAR
+═══════════════════════════════════════════════════════ -->
+<div class="stats-ticker" aria-hidden="true">
+  <div class="stats-ticker__track" id="tickerTrack">
+    <div class="stats-ticker__item">💎 <strong>200+</strong> Rare Gemstones in Collection</div>
+    <div class="stats-ticker__item">🌍 <strong>40+</strong> Countries Served</div>
+    <div class="stats-ticker__item">🏅 <strong>Internationally Recognized Certificates</strong></div>
+    <div class="stats-ticker__item">🔗 <strong>Blockchain</strong> Product Passports</div>
+    <div class="stats-ticker__item">🌿 <strong>EU ESPR</strong> Compliant</div>
+    <div class="stats-ticker__item">⬡ <strong>AR Try-On</strong> Available</div>
+    <div class="stats-ticker__item">📦 <strong>Insured</strong> Worldwide Shipping</div>
+    <div class="stats-ticker__item">⭐ <strong>12 Years</strong> of Heritage</div>
+    <!-- Duplicate for seamless loop -->
+    <div class="stats-ticker__item">💎 <strong>200+</strong> Rare Gemstones in Collection</div>
+    <div class="stats-ticker__item">🌍 <strong>40+</strong> Countries Served</div>
+    <div class="stats-ticker__item">🏅 <strong>Internationally Recognized Certificates</strong></div>
+    <div class="stats-ticker__item">🔗 <strong>Blockchain</strong> Product Passports</div>
+    <div class="stats-ticker__item">🌿 <strong>EU ESPR</strong> Compliant</div>
+    <div class="stats-ticker__item">⬡ <strong>AR Try-On</strong> Available</div>
+    <div class="stats-ticker__item">📦 <strong>Insured</strong> Worldwide Shipping</div>
+    <div class="stats-ticker__item">⭐ <strong>12 Years</strong> of Heritage</div>
+  </div>
+</div>
+
+<!-- Mobile Drawer -->
+<div class="nav__drawer" id="navDrawer" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+  <a href="#categoriesSection" class="nav__drawer-link">Sapphire</a>
+  <a href="#categoriesSection" class="nav__drawer-link">Jewellery</a>
+  <a href="products.html" class="nav__drawer-link">Shop</a>
+  <a href="#trustSection" class="nav__drawer-link">Provenance</a>
+  <a href="#footer" class="nav__drawer-link">Contact</a>
+  <div class="nav__drawer-contact">
+    <p class="nav__drawer-contact-title">Contact Us</p>
+    <p class="nav__drawer-contact-text">+94 777 866 799</p>
+    <p class="nav__drawer-contact-text">shangems2013@gmail.com</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════════ -->
+<section class="hero" aria-label="Hero — Shan Gems">
+  <div class="hero__bg" aria-hidden="true"></div>
+
+  <!-- Gemstone orb (AR / WebGL mount point) -->
+  <div class="hero__gem-orb" aria-hidden="true">
+    <div class="hero__gem-inner">
+      <canvas id="heroCanvas" style="position:absolute;inset:0;width:100%;height:100%"></canvas>
+    </div>
+  </div>
+
+  <!-- Dotted Annotations (Visual Confidence Engine) -->
+  <div class="hero__annotation hero__annotation--1" aria-label="Naturally Sourced">
+    <span class="hero__annotation-dot" aria-hidden="true"></span>
+    <span class="hero__annotation-line" aria-hidden="true"></span>
+    <span class="hero__annotation-text">Naturally Sourced</span>
+  </div>
+  <div class="hero__annotation hero__annotation--2" aria-label="GIA Certified">
+    <span class="hero__annotation-dot" aria-hidden="true"></span>
+    <span class="hero__annotation-line" aria-hidden="true"></span>
+    <span class="hero__annotation-text">GIA Certified</span>
+  </div>
+  <div class="hero__annotation hero__annotation--3" aria-label="Mine to Market">
+    <span class="hero__annotation-dot" aria-hidden="true"></span>
+    <span class="hero__annotation-line" aria-hidden="true"></span>
+    <span class="hero__annotation-text">Mine to Market</span>
+  </div>
+
+  <!-- AR Badge -->
+  <button class="hero__ar-badge" id="arHeroBadge" aria-label="AR Virtual Try-On available">
+    ⬡ AR Try-On Available
+  </button>
+
+  <!-- Hero Content -->
+  <div class="container">
+    <div class="hero__content">
+      <div class="hero__eyebrow">
+        <span class="hero__eyebrow-line" aria-hidden="true"></span>
+        <span class="hero__eyebrow-text">Sri Lanka's Finest — Est. 2013</span>
+      </div>
+      <h1 class="hero__title">
+        Rare Gems,<br>
+        <em>Timeless</em><br>
+        Heritage
+      </h1>
+      <p class="hero__subtitle">
+        Ethically sourced Ceylon sapphires, Alexandrite, and Padparadscha — 
+        each stone carrying a blockchain-verified journey from Sri Lankan mines to your hands.
+      </p>
+      <div class="hero__actions">
+        <button class="btn btn--primary" id="shopNowBtn">SHOP NOW →</button>
+        <button class="btn btn--ghost" id="browseCatalogBtn">Browse Catalogue</button>
+      </div>
+      <div class="hero__stats">
+        <div>
+          <span class="hero__stat-value">200+</span>
+          <span class="hero__stat-label">Rare Stones</span>
+        </div>
+        <div>
+          <span class="hero__stat-value">40+</span>
+          <span class="hero__stat-label">Countries Served</span>
+        </div>
+        <div>
+          <span class="hero__stat-value">12yr</span>
+          <span class="hero__stat-label">Heritage</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     HERITAGE SECTION
+     ═══════════════════════════════════════════════════════ -->
+<section class="heritage" id="heritageSection">
+  <div class="container heritage__inner">
+    <div class="heritage__content fade-up">
+      <span class="section-label">Our Heritage</span>
+      <h2 class="heritage__title">The Legacy of <em>Ceylon</em></h2>
+      <p class="heritage__text">
+        For over 2,500 years, the island formerly known as Ceylon has been the epicenter of the global gemstone trade. Known as <em>Ratnadwipa</em>, the "Island of Jewels," our soil has birthed the world's most legendary Blue Sapphires, Padparadschas, and Alexandrites.
+      </p>
+      <p class="heritage__text">
+        At Shan Gems, we honor these ancient traditions. Each stone in our collection is ethically sourced directly from underneath of the Ceylon soil, processed by master craftsmen who have passed down the art of the "Ratnapura Cut" through generations.
+      </p>
+      <div class="heritage__stats">
+        <div class="heritage__stat-item">
+          <span class="heritage__stat-val">2500+</span>
+          <span class="heritage__stat-label">Years of History</span>
+        </div>
+        <div class="heritage__stat-item">
+          <span class="heritage__stat-val">100%</span>
+          <span class="heritage__stat-label">Ethically Sourced</span>
+        </div>
+      </div>
+    </div>
+    <div class="heritage__visual fade-up">
+      <div class="heritage__img-container">
+        <!-- Image placeholder - will be generated soon -->
+        <img src="images/heritage-mining.png" alt="The Heritage of Ceylon" class="heritage__img parallax" data-speed="0.05" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CATEGORIES
+     ═══════════════════════════════════════════════════════ -->
+<section class="categories" id="categoriesSection" aria-labelledby="categoriesTitle">
+  <div class="container">
+    <div class="categories__header fade-up">
+      <span class="section-label">Discover by Stone</span>
+      <h2 class="section-title" id="categoriesTitle">Our Collections</h2>
+    </div>
+    <div class="categories__grid" id="categoryGrid" role="list" aria-label="Gemstone categories">
+      <!-- Rendered by script.js -->
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PRODUCTS
+═══════════════════════════════════════════════════════ -->
+<section class="products" id="productsSection" aria-labelledby="productsTitle">
+  <div class="container">
+    <div class="products__header">
+      <div class="fade-up">
+        <span class="section-label">Investment Gems</span>
+        <h2 class="section-title" id="productsTitle">Featured Stones</h2>
+      </div>
+      <a href="products.html" class="btn btn--ghost btn-view-all fade-up">View All →</a>
+    </div>
+
+    <!-- Filters -->
+    <div class="products__filters" role="group" aria-label="Filter by gemstone type">
+      <button class="filter-btn active" data-filter="all">All Gems</button>
+      <button class="filter-btn" data-filter="sapphire">Sapphire</button>
+      <button class="filter-btn" data-filter="ruby">Ruby</button>
+      <button class="filter-btn" data-filter="emerald">Emerald</button>
+      <button class="filter-btn" data-filter="alexandrite">Alexandrite</button>
+      <button class="filter-btn" data-filter="padparadscha">Padparadscha</button>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid" id="productGrid" role="list" aria-label="Gemstone products">
+      <!-- Rendered by script.js -->
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     TRUST SECTION
+═══════════════════════════════════════════════════════ -->
+<section class="trust" id="trustSection" aria-labelledby="trustTitle">
+  <div class="container">
+    <div class="fade-up" style="max-width:520px">
+      <span class="section-label">The Trust Engine</span>
+      <h2 class="section-title" id="trustTitle">Why Shan Gems</h2>
+      <div class="divider"></div>
+      <p style="font-size:.88rem;color:var(--grey-light);line-height:1.9">
+        Every stone carries a Digital Product Passport — a blockchain-verified record of its journey 
+        from Sri Lankan mines to your hands, compliant with EU ESPR regulations.
+      </p>
+    </div>
+    <div class="trust__grid">
+      <div class="trust-card fade-up">
+        <div class="trust-card__icon" aria-hidden="true">🔗</div>
+        <div class="trust-card__title">Blockchain Provenance</div>
+        <div class="trust-card__text">Each gem is assigned a unique digital ID at the mine. Every step — cutting, certification, export — is immutably recorded on-chain.</div>
+      </div>
+      <div class="trust-card fade-up">
+        <div class="trust-card__icon" aria-hidden="true">🏅</div>
+        <div class="trust-card__title">Internationally Recognized Certificates</div>
+        <div class="trust-card__text">All stones are certified by Sri Lanka's own National Gem & Jewellery Authority, ensuring absolute authenticity and local provenance for every gem in our collection.</div>
+      </div>
+      <div class="trust-card fade-up">
+        <div class="trust-card__icon" aria-hidden="true">🌿</div>
+        <div class="trust-card__title">EU ESPR Compliant</div>
+        <div class="trust-card__text">Full material composition, carbon footprint, and sustainability data disclosed — meeting the EU's Ecodesign for Sustainable Products Regulation.</div>
+      </div>
+      <div class="trust-card fade-up">
+        <div class="trust-card__icon" aria-hidden="true">⬡</div>
+        <div class="trust-card__title">AR Virtual Try-On</div>
+        <div class="trust-card__text">Millimetre-perfect AR rendering lets you see how each stone looks set in jewellery on your hand — from your smartphone, before you buy.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     GEM EDUCATION SECTION
+═══════════════════════════════════════════════════════ -->
+<section class="gem-education" id="educationSection" aria-labelledby="educationTitle">
+  <div class="container">
+    <div class="gem-education__header">
+      <span class="section-label">The Knowledge Vault</span>
+      <h2 class="section-title" id="educationTitle">Understand Your <em>Investment</em></h2>
+      <p style="font-size: 0.88rem; color: var(--grey-light); max-width: 540px; margin: 1rem auto 0; line-height: 1.8;">
+        Buying a fine gemstone is a multi-generational decision. Our education resources help you understand what makes a stone truly exceptional.
+      </p>
+    </div>
+    <div class="gem-education__grid">
+      <a href="products.html?category=sapphire" class="edu-card reveal">
+        <span class="edu-card__emoji">💎</span>
+        <div class="edu-card__title">Ceylon Sapphire Guide</div>
+        <p class="edu-card__text">Why Ceylon (Sri Lankan) sapphires command 20–40% premiums over stones of identical quality from other origins — and how to identify them.</p>
+        <div class="edu-card__cta">Read Guide →</div>
+      </a>
+      <a href="products.html?category=alexandrite" class="edu-card reveal reveal-delay-1">
+        <span class="edu-card__emoji">🟣</span>
+        <div class="edu-card__title">The Alexandrite Effect</div>
+        <p class="edu-card__text">The rarest chrysoberyl — valued for its extraordinary color-change from blue-green in daylight to red-purple under incandescent light. Natural specimens are extraordinarily rare.</p>
+        <div class="edu-card__cta">Explore →</div>
+      </a>
+      <a href="products.html?category=padparadscha" class="edu-card reveal reveal-delay-2">
+        <span class="edu-card__emoji">🟠</span>
+        <div class="edu-card__title">Padparadscha Sapphire</div>
+        <p class="edu-card__text">Named after the lotus flower, Padparadscha is the rarest variety of corundum. Its precise salmon-pink hue places it above all other sapphires in collector value.</p>
+        <div class="edu-card__cta">Discover →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════ -->
+<footer class="footer" id="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer__grid">
+      <!-- Brand -->
+      <div>
+        <img src="images/shan-gems-logo.jpg" alt="Shan Gems" class="footer__logo-img" loading="lazy">
+        <p class="footer__desc footer__desc--logo">
+          A Sri Lankan heritage gemstone enterprise connecting the world's wealth hunters with 
+          ethically sourced, blockchain-verified precious stones since 2013.
+        </p>
+      </div>
+      <!-- Collections -->
+      <div>
+        <div class="footer__col-title">Collections</div>
+        <a href="#" class="footer__link">Blue Sapphire</a>
+        <a href="#" class="footer__link">Yellow Sapphire</a>
+        <a href="#" class="footer__link">Padparadscha</a>
+        <a href="#" class="footer__link">Alexandrite</a>
+        <a href="#" class="footer__link">Ruby</a>
+        <a href="#" class="footer__link">Spinel</a>
+      </div>
+      <!-- Services -->
+      <div>
+        <div class="footer__col-title">Services</div>
+        <a href="#" class="footer__link">Gem Certification</a>
+        <a href="#" class="footer__link">Export Services</a>
+        <a href="#" class="footer__link">Investment Advice</a>
+        <a href="#" class="footer__link">Custom Jewellery</a>
+        <a href="#" class="footer__link">AR Try-On</a>
+      </div>
+      <!-- Contact -->
+      <div>
+        <div class="footer__col-title">Contact</div>
+        <div class="footer__contact-item">
+          <span>📞</span>
+          <a href="tel:+94777866799">+94 777 866 799</a>
+        </div>
+        <div class="footer__contact-item">
+          <span>✉</span>
+          <a href="mailto:shangems2013@gmail.com">shangems2013@gmail.com</a>
+        </div>
+        <div class="footer__contact-item">
+          <span>📍</span>
+          <span>No.49/1, 1st Lane, Horetuduwa, Moratuwa, Sri Lanka</span>
+        </div>
+        <div style="margin-top:1rem">
+          <div class="footer__col-title">Proprietor</div>
+          <div class="footer__contact-item">
+            <span>👤</span>
+            <span>Sameera Fernando</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div style="display:flex; flex-direction:column; gap:0.25rem;">
+        <span>© 2026 Shan Gems. All rights reserved.</span>
+        <span style="font-size: 0.75rem; color: var(--gold); opacity: 0.8; letter-spacing: 0.05em;">Powered by Brix Global Solution — <a href="mailto:brixglobalsolution2026@gmail.com" style="color: inherit; text-decoration: underline;">brixglobalsolution2026@gmail.com</a></span>
+      </div>
+      <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+        <a href="#" class="footer__link" style="font-size:.68rem">Privacy Policy</a>
+        <a href="#" class="footer__link" style="font-size:.68rem">Terms of Sale</a>
+        <a href="#" class="footer__link" style="font-size:.68rem">ESPR Compliance</a>
+      </div>
+      <div class="footer__ngja" aria-label="Internationally Recognized Certificates">
+        <span>🏅</span> Internationally Recognized Certificates
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     CART SIDEBAR
+═══════════════════════════════════════════════════════ -->
+<div class="cart-overlay" id="cartOverlay" role="dialog" aria-label="Shopping cart" aria-modal="true">
+  <aside class="cart-sidebar">
+    <div class="cart__header">
+      <h2 class="cart__title">Your Collection</h2>
+      <button class="modal__close" id="cartClose" aria-label="Close cart">✕</button>
+    </div>
+    <div class="cart__body" id="cartBody">
+      <div class="cart-empty">
+        <div class="cart-empty__icon" aria-hidden="true">💎</div>
+        <div class="cart-empty__text">Your collection is empty.<br>Discover our finest Sri Lankan gems.</div>
+      </div>
+    </div>
+    <div class="cart__footer">
+      <div class="cart__total">
+        <span class="cart__total-label">Order Total</span>
+        <span class="cart__total-value" id="cartTotal">USD 0</span>
+      </div>
+      <button class="btn btn--primary cart__checkout-btn" id="cartCheckoutBtn">Proceed to Payment →</button>
+      <div class="cart__note">🔒 Secure checkout · Worldwide Shipping</div>
+    </div>
+  </aside>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     DPP MODAL
+═══════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="dppModalOverlay" role="dialog" aria-labelledby="dppModalTitle" aria-modal="true">
+  <div class="modal">
+    <div class="modal__header">
+      <h2 class="modal__title" id="dppModalTitle">Digital Product Passport</h2>
+      <button class="modal__close" aria-label="Close">✕</button>
+    </div>
+    <div class="modal__body" id="dppContent">
+      <!-- Populated by script.js -->
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     AR MODAL
+═══════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="arModalOverlay" role="dialog" aria-labelledby="arModalTitle" aria-modal="true">
+  <div class="modal ar-modal">
+    <div class="modal__header">
+      <h2 class="modal__title" id="arModalTitle">AR Virtual Try-On</h2>
+      <button class="modal__close" aria-label="Close">✕</button>
+    </div>
+    <div class="modal__body" id="arContent">
+      <!-- Populated by script.js -->
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PAYMENT MODAL
+═══════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="paymentModalOverlay" role="dialog" aria-labelledby="paymentModalTitle" aria-modal="true">
+  <div class="modal payment-modal">
+    <div class="modal__header">
+      <h2 class="modal__title" id="paymentModalTitle">Secure Checkout</h2>
+      <button class="modal__close" aria-label="Close">✕</button>
+    </div>
+    <div class="modal__body" id="paymentContent">
+      <!-- Populated by script.js -->
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     CONSULTATION WIDGET
+═══════════════════════════════════════════════════════ -->
+<div class="consult-widget" aria-label="Expert consultation">
+  <div class="consult-popup" id="consultPopup" role="dialog" aria-label="Contact options">
+    <div class="consult-popup__title">Speak to a Gemologist</div>
+    <p class="consult-popup__text">Our experts are available for private consultations on five- and six-figure investment gems.</p>
+    <div class="consult-popup__actions">
+      <button class="consult-popup__action">
+        <span>📞</span> Call +94 777 866 799
+      </button>
+      <button class="consult-popup__action">
+        <span>✉</span> Email a Gemologist
+      </button>
+      <button class="consult-popup__action">
+        <span>💬</span> WhatsApp Chat
+      </button>
+    </div>
+  </div>
+  <button class="consult-btn" id="consultBtn" aria-label="Open consultation options" aria-haspopup="dialog">
+    💬
+  </button>
+</div>
+
+<!-- WhatsApp Floating Widget -->
+<div class="whatsapp-float" aria-label="Chat on WhatsApp">
+  <div class="whatsapp-float__tooltip">Chat with a Gemologist</div>
+  <a class="whatsapp-float__btn" href="https://wa.me/94777866799?text=Hello%20Shan%20Gems%2C%20I%20am%20interested%20in%20your%20gemstone%20collection." target="_blank" rel="noopener" aria-label="WhatsApp chat">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+</div>
+
+<!-- Comparison Bar -->
+<div class="compare-bar" id="compareBar">
+  <div class="container compare-bar__inner">
+    <div class="compare-bar__info">
+      <span id="compareCount">0</span> gemstones selected for comparison
+    </div>
+    <div class="compare-bar__actions">
+      <button class="btn btn--white btn--sm" id="clearCompareBtn">Clear</button>
+      <button class="btn btn--primary btn--sm" id="showCompareBtn">Compare Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Comparison Modal -->
+<div class="modal-overlay" id="compareModalOverlay" role="dialog" aria-modal="true">
+  <div class="modal modal--full">
+    <div class="modal__header">
+      <h2 class="modal__title">Gemstone Comparison</h2>
+      <button class="modal__close" id="closeCompareModal">✕</button>
+    </div>
+    <div class="modal__body" id="compareTableContainer">
+      <!-- Generated via JS -->
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="false"></div>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-label="Search gemstones" aria-modal="true">
+  <button class="search-overlay__close" id="searchOverlayClose" aria-label="Close search">✕</button>
+  <p class="search-overlay__hint">Search the vault</p>
+  <div class="search-overlay__input-wrap">
+    <input type="search" class="search-overlay__input" id="searchOverlayInput" placeholder="Ceylon Blue Sapphire..." autocomplete="off">
+    <span class="search-overlay__icon">🔍</span>
+  </div>
+  <div class="search-suggestions">
+    <a href="products.html?category=sapphire" class="search-suggestion-tag">Blue Sapphire</a>
+    <a href="products.html?category=alexandrite" class="search-suggestion-tag">Alexandrite</a>
+    <a href="products.html?category=padparadscha" class="search-suggestion-tag">Padparadscha</a>
+    <a href="products.html?category=ruby" class="search-suggestion-tag">Star Ruby</a>
+    <a href="products.html?category=emerald" class="search-suggestion-tag">Tsavorite</a>
+    <a href="products.html" class="search-suggestion-tag">Unheated Gems</a>
+    <a href="products.html" class="search-suggestion-tag">GIA Certified</a>
+  </div>
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal-overlay" id="checkoutModalOverlay" role="dialog" aria-modal="true">
+  <div class="modal modal--checkout" style="max-width: 500px;">
+    <div class="modal__header">
+      <h2 class="modal__title">Secure Checkout</h2>
+      <button class="modal__close" id="closeCheckoutModal">✕</button>
+    </div>
+    <div class="modal__body" style="padding: 2rem;">
+      <form id="checkoutForm">
+        <h3 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem; color: var(--gold);">1. Shipping Details</h3>
+        <div class="form-group">
+          <label class="form-label" for="chk-name">Full Name</label>
+          <input type="text" id="chk-name" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="chk-email">Email Address</label>
+          <input type="email" id="chk-email" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="chk-address">Shipping Address</label>
+          <textarea id="chk-address" class="form-input" rows="2" required></textarea>
+        </div>
+
+        <h3 style="font-family: var(--font-serif); font-size: 1.25rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--gold);">2. Payment Method</h3>
+        <div class="form-group">
+          <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; cursor: pointer;">
+            <input type="radio" name="paymentMethod" value="card" checked> Credit / Debit Card (Stripe)
+          </label>
+          <div id="cardDetails" style="background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 1rem;">
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+              <input type="text" class="form-input" placeholder="Card Number (Mock)" pattern="[0-9]{16}">
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <input type="text" class="form-input" placeholder="MM/YY" style="flex:1;">
+              <input type="text" class="form-input" placeholder="CVC" style="flex:1;">
+            </div>
+          </div>
+
+          <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+            <input type="radio" name="paymentMethod" value="wire"> Bank Wire Transfer
+          </label>
+          <p id="wireDetails" style="display: none; font-size: 0.8rem; color: var(--grey-light); margin-top: 0.5rem; margin-left: 1.5rem;">
+            You will receive an invoice with our banking details. Order processes upon receipt of funds.
+          </p>
+        </div>
+        
+        <div style="margin-top: 2rem; border-top: 1px solid rgba(201,168,76,0.2); padding-top: 1.5rem;">
+          <button type="submit" class="btn btn--primary" id="confirmOrderBtn" style="width: 100%; justify-content: center;">Place Order <span id="checkoutTotal" style="margin-left: 5px;">$0</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

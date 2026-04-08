@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#060e1e">
+  <title>Admin Dashboard — Shan Gems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ── Admin Layout ── */
+    :root {
+      --sidebar-w: 260px;
+      --sidebar-bg: #010816;
+      --admin-bg: #060e1e;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--admin-bg);
+      color: var(--slate-grey);
+      display: flex;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Sidebar ── */
+    .admin-sidebar {
+      width: var(--sidebar-w);
+      background: var(--sidebar-bg);
+      border-right: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 2rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+      left: 0;
+      top: 0;
+      z-index: 200;
+      overflow-y: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar-logo {
+      width: 100px;
+      border-radius: 6px;
+      margin-bottom: 2.5rem;
+    }
+
+    .sidebar-section-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.25);
+      padding: 0 0.75rem;
+      margin-bottom: 0.75rem;
+      margin-top: 1.5rem;
+    }
+
+    .sidebar-nav__link {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.85rem;
+      font-weight: 400;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      margin-bottom: 0.25rem;
+      cursor: pointer;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    .sidebar-nav__link:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .sidebar-nav__link.active {
+      background: rgba(201, 161, 74, 0.12);
+      color: var(--gold);
+      border: 1px solid rgba(201, 161, 74, 0.15);
+    }
+
+    .sidebar-nav__icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .sidebar-nav__badge {
+      margin-left: auto;
+      background: var(--gold);
+      color: var(--surface);
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.1rem 0.4rem;
+      border-radius: 100px;
+    }
+
+    .sidebar-user {
+      margin-top: auto;
+      padding: 1rem;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .sidebar-user__name {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+    }
+
+    .sidebar-user__role {
+      font-size: 0.7rem;
+      color: var(--gold);
+      margin-top: 0.15rem;
+    }
+
+    /* ── Main Content ── */
+    .admin-main {
+      flex: 1;
+      margin-left: var(--sidebar-w);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .admin-topbar {
+      background: rgba(1, 8, 22, 0.7);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 1rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .admin-breadcrumb {
+      font-size: 0.78rem;
+      color: var(--grey);
+    }
+
+    .admin-breadcrumb span {
+      color: var(--gold);
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .topbar-time {
+      font-size: 0.75rem;
+      color: var(--grey);
+    }
+
+    /* ── Page Content ── */
+    .admin-page {
+      padding: 2.5rem;
+      flex: 1;
+      display: none;
+    }
+
+    .admin-page.active { display: block; }
+
+    .page-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .page-title {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .page-subtitle {
+      font-size: 0.82rem;
+      color: var(--grey-light);
+      margin-top: 0.4rem;
+      opacity: 0.7;
+    }
+
+    /* ── Stat Cards ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+
+    .stat-card:hover { border-color: rgba(201, 161, 74, 0.2); }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    .stat-card__icon {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .stat-card__icon--gold { background: rgba(201, 161, 74, 0.15); }
+    .stat-card__icon--blue { background: rgba(37, 99, 235, 0.15); }
+    .stat-card__icon--green { background: rgba(74, 222, 128, 0.1); }
+    .stat-card__icon--red { background: rgba(248, 113, 113, 0.1); }
+
+    .stat-card__label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--grey);
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-card__value {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+
+    .stat-card__change {
+      font-size: 0.72rem;
+      color: #4ade80;
+    }
+
+    /* ── Dashboard Charts ── */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 1200px) {
+      .dashboard-grid { grid-template-columns: 2fr 1fr; }
+    }
+
+    .chart-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .chart-card__title {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 0.25rem;
+    }
+
+    .chart-card__subtitle {
+      font-size: 0.75rem;
+      color: var(--grey);
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-wrap { height: 220px; }
+
+    /* ── Panel / Table ── */
+    .admin-panel {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .admin-panel__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .admin-panel__title {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      color: #fff;
+    }
+
+    .admin-table { width: 100%; border-collapse: collapse; }
+
+    .admin-table th {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--grey);
+      padding: 1rem 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      text-align: left;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .admin-table td {
+      padding: 1.1rem 2rem;
+      font-size: 0.85rem;
+      color: var(--slate-grey);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      vertical-align: middle;
+    }
+
+    .admin-table tr:last-child td { border-bottom: none; }
+
+    .admin-table tr:hover td { background: rgba(255, 255, 255, 0.02); }
+
+    .gem-preview {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .gem-icon {
+      width: 38px; height: 38px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      overflow: hidden;
+    }
+
+    .gem-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gem-name { font-weight: 500; color: #fff; font-size: 0.88rem; }
+    .gem-origin { font-size: 0.72rem; color: var(--grey); margin-top: 0.1rem; }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+
+    .status-pill::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .status-pill--available { background: rgba(74, 222, 128, 0.1); color: #4ade80; }
+    .status-pill--pending { background: rgba(251, 191, 36, 0.1); color: #fbbf24; }
+    .status-pill--sold { background: rgba(248, 113, 113, 0.1); color: #f87171; }
+    .status-pill--processing { background: rgba(96, 165, 250, 0.1); color: #60a5fa; }
+    .status-pill--shipped { background: rgba(167, 139, 250, 0.1); color: #a78bfa; }
+    .status-pill--new { background: rgba(201, 161, 74, 0.1); color: var(--gold); }
+    .status-pill--replied { background: rgba(74, 222, 128, 0.08); color: #4ade80; }
+
+    .action-group { display: flex; gap: 0.5rem; align-items: center; }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 8px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--grey-light);
+      background: rgba(255, 255, 255, 0.05);
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .action-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201, 161, 74, 0.08); }
+    .action-btn--danger:hover { border-color: #f87171; color: #f87171; background: rgba(248, 113, 113, 0.08); }
+    .action-btn--primary { background: var(--gold); color: var(--surface); border-color: var(--gold); font-weight: 600; }
+    .action-btn--primary:hover { background: var(--gold-light); color: var(--surface); border-color: var(--gold-light); }
+
+    /* ── Inquiry Cards ── */
+    .inquiry-card {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+      transition: background 0.2s ease;
+    }
+
+    .inquiry-card:last-child { border-bottom: none; }
+    .inquiry-card:hover { background: rgba(255, 255, 255, 0.02); }
+
+    .inquiry-card__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+    }
+
+    .inquiry-card__name {
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: #fff;
+    }
+
+    .inquiry-card__time {
+      font-size: 0.7rem;
+      color: var(--grey);
+    }
+
+    .inquiry-card__email {
+      font-size: 0.75rem;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+
+    .inquiry-card__message {
+      font-size: 0.8rem;
+      color: var(--grey-light);
+      line-height: 1.6;
+    }
+
+    /* ── Recent Activity ── */
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .activity-item:last-child { border-bottom: none; }
+
+    .activity-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+      margin-top: 0.4rem;
+    }
+
+    .activity-text { font-size: 0.82rem; color: var(--grey-light); line-height: 1.5; }
+    .activity-time { font-size: 0.7rem; color: var(--grey); margin-top: 0.15rem; }
+
+    /* ── Modal ── */
+    .admin-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .admin-modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .admin-modal {
+      background: var(--sidebar-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 700px;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .admin-modal-overlay.open .admin-modal {
+      transform: translateY(0);
+    }
+
+    .admin-modal__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.75rem 2rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      position: sticky;
+      top: 0;
+      background: var(--sidebar-bg);
+      z-index: 1;
+    }
+
+    .admin-modal__title {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: #fff;
+    }
+
+    .admin-modal__close {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--grey);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+    }
+
+    .admin-modal__close:hover { background: rgba(248, 113, 113, 0.15); color: #f87171; }
+
+    .admin-modal__body { padding: 2rem; }
+
+    .form-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--grey);
+      display: block;
+      margin-bottom: 0.6rem;
+    }
+
+    .form-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      font-size: 0.88rem;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s ease;
+      font-family: var(--font-sans);
+    }
+
+    .form-input:focus { border-color: var(--gold); }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+
+    .form-group { margin-bottom: 1.25rem; }
+
+    /* Search & Filter Bar */
+    .filter-bar {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 220px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 0.7rem 1rem 0.7rem 2.5rem;
+      font-size: 0.85rem;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s ease;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23718096' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath stroke-linecap='round' d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: 0.75rem center;
+    }
+
+    .search-input:focus { border-color: rgba(201, 161, 74, 0.4); }
+
+    .filter-select {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      padding: 0.7rem 1rem;
+      font-size: 0.82rem;
+      color: #fff;
+      outline: none;
+      cursor: pointer;
+      font-family: var(--font-sans);
+    }
+
+    .filter-select option {
+      background: #060e1e;
+      color: #fff;
+    }
+
+    /* Toast */
+    .admin-toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: rgba(1, 8, 22, 0.95);
+      border: 1px solid rgba(201, 161, 74, 0.3);
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      font-size: 0.85rem;
+      color: #fff;
+      z-index: 2000;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: all 0.3s ease;
+      max-width: 320px;
+    }
+
+    .admin-toast.show { opacity: 1; transform: translateY(0); }
+
+    /* Mobile hamburger */
+    .admin-hamburger {
+      display: none;
+      width: 40px; height: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      color: var(--grey-light);
+      font-size: 1.2rem;
+      cursor: pointer;
+      align-items: center; justify-content: center;
+    }
+
+    @media (max-width: 900px) {
+      .admin-sidebar { transform: translateX(-100%); }
+      .admin-sidebar.open { transform: translateX(0); }
+      .admin-main { margin-left: 0; }
+      .admin-hamburger { display: flex; }
+      .admin-page { padding: 1.5rem; }
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 150;
+    }
+    .sidebar-overlay.show { display: block; }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--grey);
+    }
+
+    .empty-state__icon { font-size: 3rem; margin-bottom: 1rem; opacity: 0.3; }
+    .empty-state__text { font-size: 0.88rem; }
+
+    /* Sync Button */
+    .sync-cloud-btn {
+      display: none; /* Hidden unless database is empty */
+      background: rgba(201, 161, 74, 0.1);
+      border: 1px dashed var(--gold);
+      color: var(--gold);
+    }
+    .sync-cloud-btn:hover {
+      background: var(--gold);
+      color: var(--surface);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar Overlay for Mobile -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="admin-sidebar" id="adminSidebar">
+  <img src="images/shan-gems-logo.jpg" alt="Shan Gems" class="sidebar-logo">
+
+  <p class="sidebar-section-label">Main Menu</p>
+  <nav>
+    <button class="sidebar-nav__link active" data-page="dashboard" onclick="switchPage('dashboard', this)">
+      <span class="sidebar-nav__icon">📊</span> Dashboard
+    </button>
+    <button class="sidebar-nav__link" data-page="products" onclick="switchPage('products', this)">
+      <span class="sidebar-nav__icon">💎</span> Products
+    </button>
+    <button class="sidebar-nav__link" data-page="orders" onclick="switchPage('orders', this)">
+      <span class="sidebar-nav__icon">📦</span> Orders
+      <span class="sidebar-nav__badge" id="ordersCountBadge">3</span>
+    </button>
+    <button class="sidebar-nav__link" data-page="inquiries" onclick="switchPage('inquiries', this)">
+      <span class="sidebar-nav__icon">💬</span> Inquiries
+      <span class="sidebar-nav__badge" id="inquiryCountBadge">5</span>
+    </button>
+
+    <p class="sidebar-section-label">Reports</p>
+    <button class="sidebar-nav__link" data-page="analytics" onclick="switchPage('analytics', this)">
+      <span class="sidebar-nav__icon">📈</span> Analytics
+    </button>
+
+    <p class="sidebar-section-label">System</p>
+    <button class="sidebar-nav__link" data-page="settings" onclick="switchPage('settings', this)">
+      <span class="sidebar-nav__icon">⚙️</span> Settings
+    </button>
+    <a class="sidebar-nav__link" href="index.html" target="_blank" style="color: rgba(255,255,255,0.4);">
+      <span class="sidebar-nav__icon">🌐</span> View Site
+    </a>
+  </nav>
+
+  <div class="sidebar-user">
+    <div style="font-size:1.5rem; margin-bottom:0.5rem;">👤</div>
+    <div class="sidebar-user__name" id="adminUserName">Sameera Fernando</div>
+    <div class="sidebar-user__role">Proprietor · Internationally Recognized</div>
+    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.65rem; color: rgba(255,255,255,0.3); letter-spacing: 0.05em; text-transform: uppercase;">
+      System Developed by<br>
+      <span style="color: var(--gold); opacity: 0.8;">Brix Global Solution</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══ MAIN ═══ -->
+<main class="admin-main">
+
+  <!-- Top Bar -->
+  <header class="admin-topbar">
+    <div style="display:flex; align-items:center; gap:1rem;">
+      <button class="admin-hamburger" id="adminHamburger">☰</button>
+      <div class="admin-breadcrumb">Shan Gems Admin / <span id="breadcrumbCurrent">Dashboard</span></div>
+    </div>
+    <div class="topbar-actions">
+      <span class="topbar-time" id="topbarTime"></span>
+      <button class="action-btn action-btn--danger" onclick="handleLogout()">Logout</button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════ DASHBOARD PAGE ═══════════════════ -->
+  <section class="admin-page active" id="page-dashboard">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Proprietor Dashboard</h1>
+        <p class="page-subtitle">Welcome back. Here's your Shan Gems management overview.</p>
+      </div>
+      <button class="action-btn action-btn--primary" onclick="switchPage('products', document.querySelector('[data-page=products]')); openProductModal()">+ Add Gemstone</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--gold">💎</div>
+        <div class="stat-card__label">Total Collection</div>
+        <div class="stat-card__value" id="statTotal">6</div>
+        <div class="stat-card__change">↑ 2 this month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--green">📦</div>
+        <div class="stat-card__label">Active Orders</div>
+        <div class="stat-card__value" id="statOrders">3</div>
+        <div class="stat-card__change">↑ 1 new today</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--blue">💬</div>
+        <div class="stat-card__label">Pending Inquiries</div>
+        <div class="stat-card__value" id="statInquiries">5</div>
+        <div class="stat-card__change">↑ 2 new today</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--red">💰</div>
+        <div class="stat-card__label">Revenue (MTD)</div>
+        <div class="stat-card__value" id="statRevenue">$0</div>
+        <div class="stat-card__change">↑ 12% vs last month</div>
+      </div>
+    </div>
+
+    <!-- Charts & Activity -->
+    <div class="dashboard-grid">
+      <div class="chart-card">
+        <div class="chart-card__title">Monthly Revenue</div>
+        <div class="chart-card__subtitle">2026 sales performance</div>
+        <div class="chart-wrap">
+          <canvas id="revenueChart"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card__title">Sales by Category</div>
+        <div class="chart-card__subtitle">Gemstone breakdown</div>
+        <div class="chart-wrap">
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent Activity & Products -->
+    <div class="dashboard-grid" style="margin-top: 1.5rem;">
+      <!-- Recent Products -->
+      <div class="admin-panel">
+        <div class="admin-panel__header">
+          <span class="admin-panel__title">Recent Gemstones</span>
+          <button class="action-btn" onclick="switchPage('products', document.querySelector('[data-page=products]'))">View All</button>
+        </div>
+        <table class="admin-table" id="dashProductTable">
+          <thead><tr><th>Gemstone</th><th>Category</th><th>Price</th><th>Status</th></tr></thead>
+          <tbody id="dashProductBody"></tbody>
+        </table>
+      </div>
+      <!-- Activity -->
+      <div class="admin-panel">
+        <div class="admin-panel__header">
+          <span class="admin-panel__title">Recent Activity</span>
+        </div>
+        <div style="padding: 0.5rem 1.5rem;" id="activityFeed">
+          <div class="activity-item">
+            <div class="activity-dot"></div>
+            <div><div class="activity-text">New inquiry from <strong>Benjamin Clarke</strong> re: Alexandrite</div><div class="activity-time">5 minutes ago</div></div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:#4ade80;"></div>
+            <div><div class="activity-text">Order <strong>#SG-1024</strong> shipped to USA</div><div class="activity-time">2 hours ago</div></div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:#60a5fa;"></div>
+            <div><div class="activity-text">DPP certificate issued for <strong>sg-003</strong></div><div class="activity-time">Yesterday</div></div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:#a78bfa;"></div>
+            <div><div class="activity-text">New gemstone <strong>Yellow Sapphire</strong> added to collection</div><div class="activity-time">2 days ago</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ PRODUCTS PAGE ═══════════════════ -->
+  <section class="admin-page" id="page-products">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Gemstone Collection</h1>
+        <p class="page-subtitle">Manage your inventory of precious stones.</p>
+      </div>
+      <div style="display:flex; gap:0.75rem;">
+        <button class="action-btn sync-cloud-btn" id="syncCloudBtn" onclick="syncToCloud()">☁️ Sync to Cloud</button>
+        <button class="action-btn action-btn--primary" onclick="openProductModal()">+ Add Gemstone</button>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <input type="text" class="search-input" id="productSearch" placeholder="Search gemstones..." oninput="filterProductTable()">
+      <select class="filter-select" id="productCatFilter" onchange="filterProductTable()">
+        <option value="">All Categories</option>
+        <option value="sapphire">Sapphire</option>
+        <option value="ruby">Ruby</option>
+        <option value="emerald">Emerald</option>
+        <option value="alexandrite">Alexandrite</option>
+        <option value="padparadscha">Padparadscha</option>
+        <option value="spinel">Spinel</option>
+      </select>
+    </div>
+
+    <div class="admin-panel">
+      <table class="admin-table" id="productTable">
+        <thead>
+          <tr>
+            <th>Gemstone</th>
+            <th>Category</th>
+            <th>Details</th>
+            <th>Price</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="productTableBody">
+          <tr><td colspan="6"><div class="empty-state"><div class="empty-state__icon">💎</div><p class="empty-state__text">Loading collection...</p></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ ORDERS PAGE ═══════════════════ -->
+  <section class="admin-page" id="page-orders">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Order Management</h1>
+        <p class="page-subtitle">Track and manage all customer purchases.</p>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <input type="text" class="search-input" placeholder="Search by order ID or customer...">
+      <select class="filter-select">
+        <option>All Statuses</option>
+        <option>Pending</option>
+        <option>Processing</option>
+        <option>Shipped</option>
+        <option>Completed</option>
+      </select>
+    </div>
+
+    <div class="admin-panel">
+      <table class="admin-table" id="ordersTable">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Gemstone</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="ordersTableBody">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ INQUIRIES PAGE ═══════════════════ -->
+  <section class="admin-page" id="page-inquiries">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Customer Inquiries</h1>
+        <p class="page-subtitle">Respond to and manage client messages.</p>
+      </div>
+    </div>
+    <div class="admin-panel">
+      <div id="inquiryListFull">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ ANALYTICS PAGE ═══════════════════ -->
+  <section class="admin-page" id="page-analytics">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Analytics & Reports</h1>
+        <p class="page-subtitle">Performance insights for Shan Gems.</p>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--gold">👁️</div>
+        <div class="stat-card__label">Site Visitors (MTD)</div>
+        <div class="stat-card__value">2,841</div>
+        <div class="stat-card__change">↑ 18% vs last month</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--blue">🔗</div>
+        <div class="stat-card__label">DPP Scans</div>
+        <div class="stat-card__value">192</div>
+        <div class="stat-card__change">↑ 7 today</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--green">📈</div>
+        <div class="stat-card__label">Conversion Rate</div>
+        <div class="stat-card__value" id="statConversion">0%</div>
+        <div class="stat-card__change">↑ 0.4% this week</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card__icon stat-card__icon--red">🌍</div>
+        <div class="stat-card__label">Countries Reached</div>
+        <div class="stat-card__value" id="statReach">0</div>
+        <div class="stat-card__change">Top: USA, UK, Japan</div>
+      </div>
+    </div>
+
+    <div class="dashboard-grid" style="margin-top: 1.5rem;">
+      <div class="chart-card">
+        <div class="chart-card__title">Weekly Visitors</div>
+        <div class="chart-card__subtitle">Last 7 days by source</div>
+        <div class="chart-wrap"><canvas id="visitorsChart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-card__title">Top Performers</div>
+        <div class="chart-card__subtitle">Most viewed gemstones</div>
+        <div style="padding-top:0.5rem;" id="topPerformers">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ SETTINGS PAGE ═══════════════════ -->
+  <section class="admin-page" id="page-settings">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Settings</h1>
+        <p class="page-subtitle">Manage your admin account and site configuration.</p>
+      </div>
+    </div>
+
+    <div class="admin-panel" style="max-width: 700px;">
+      <div class="admin-panel__header"><span class="admin-panel__title">Admin Account</span></div>
+      <div style="padding: 2rem;">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Owner Name</label>
+            <input type="text" class="form-input" value="Sameera Fernando">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-input" value="admin@shangems.com">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">New Password</label>
+          <input type="password" class="form-input" placeholder="Leave blank to keep current password">
+        </div>
+        <div style="text-align:right; margin-top: 0.5rem;">
+          <button class="action-btn action-btn--primary" onclick="showToast('✓ Settings saved successfully')">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-panel" style="max-width: 700px; margin-top: 1.5rem;">
+      <div class="admin-panel__header"><span class="admin-panel__title">Site Configuration</span></div>
+      <div style="padding: 2rem;">
+        <div class="form-group">
+          <label class="form-label">Contact WhatsApp Number</label>
+          <input type="text" class="form-input" value="+94 777 866 799">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Business Email</label>
+          <input type="email" class="form-input" value="shangems2013@gmail.com">
+        </div>
+        <div style="text-align:right; margin-top: 0.5rem;">
+          <button class="action-btn action-btn--primary" onclick="showToast('✓ Site config updated')">Update Config</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ ADD/EDIT PRODUCT MODAL ═══ -->
+<div class="admin-modal-overlay" id="productModalOverlay">
+  <div class="admin-modal">
+    <div class="admin-modal__header">
+      <h2 class="admin-modal__title" id="productModalTitle">Add New Gemstone</h2>
+      <button class="admin-modal__close" onclick="closeProductModal()">✕</button>
+    </div>
+    <div class="admin-modal__body">
+      <form id="productForm">
+        <input type="hidden" id="p-id">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Gemstone Name</label>
+            <input type="text" id="p-name" class="form-input" placeholder="Ceylon Blue Sapphire" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select id="p-category" class="form-input" aria-label="Category">
+              <option value="sapphire">Sapphire</option>
+              <option value="ruby">Ruby</option>
+              <option value="diamond">Diamond</option>
+              <option value="emerald">Emerald</option>
+              <option value="alexandrite">Alexandrite</option>
+              <option value="pearl">Pearl</option>
+              <option value="garnet">Garnet</option>
+              <option value="aquamarine">Aquamarine</option>
+              <option value="opal">Opal</option>
+              <option value="tourmaline">Tourmaline</option>
+              <option value="spinel">Spinel</option>
+              <option value="amethyst">Amethyst</option>
+              <option value="citrine">Citrine</option>
+              <option value="agate">Agate</option>
+              <option value="lapis">Lapis Lazuli</option>
+              <option value="morganite">Morganite</option>
+              <option value="tsavorite">Tsavorite</option>
+              <option value="zircon">Zircon</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Weight (Carats)</label>
+            <input type="number" step="0.01" id="p-carat" class="form-input" placeholder="4.82" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Price (USD)</label>
+            <input type="number" id="p-price" class="form-input" placeholder="4850" required>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Origin</label>
+            <input type="text" id="p-origin" class="form-input" placeholder="Ratnapura, Sri Lanka" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Certification</label>
+            <input type="text" id="p-cert" class="form-input" placeholder="GIA Certified">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="p-image">Gemstone Image</label>
+          <input type="file" id="p-image" class="form-input" accept="image/*" title="Upload gemstone photo">
+          <small class="form-hint">Upload a high-quality photo of the stone.</small>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Summary Details (e.g. 4.82 ct · Oval Cut · Heat Treated)</label>
+          <input type="text" id="p-details" class="form-input" placeholder="4.82 ct · Heat Treated · Oval Cut" required>
+        </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Emoji Icon</label>
+            <input type="text" id="p-emoji" class="form-input" placeholder="💎">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="p-shape">3D Shape Representation</label>
+            <select id="p-shape" class="form-input">
+              <optgroup label="Standard Cuts">
+                <option value="round">Round Brilliant</option>
+                <option value="oval">Oval Cut</option>
+                <option value="cushion">Cushion Cut</option>
+                <option value="emerald-cut">Emerald Cut</option>
+                <option value="princess">Princess Cut (Square)</option>
+              </optgroup>
+              <optgroup label="Fancy Cuts">
+                <option value="pear">Pear / Drop</option>
+                <option value="marquise">Marquise</option>
+                <option value="heart">Heart Shape</option>
+                <option value="radiant">Radiant Cut</option>
+                <option value="asscher">Asscher Cut</option>
+                <option value="trillion">Trillion / Trilliant</option>
+                <option value="hexagon">Hexagon</option>
+                <option value="kite">Kite Shape</option>
+                <option value="shield">Shield Shape</option>
+                <option value="baguette">Baguette (Tapered/Straight)</option>
+              </optgroup>
+              <optgroup label="Smooth Cuts">
+                <option value="sphere">Sphere (Full Round)</option>
+                <option value="cabochon">Cabochon (Dome)</option>
+                <option value="briolette">Briolette (Drop Faceted)</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1rem;">
+          <button type="button" class="action-btn" onclick="closeProductModal()">Cancel</button>
+          <button type="submit" class="action-btn action-btn--primary" id="productSaveBtn">SAVE GEMSTONE →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="admin-toast" id="adminToast"></div>
+
+<script src="admin.js"></script>
+</body>
+</html>

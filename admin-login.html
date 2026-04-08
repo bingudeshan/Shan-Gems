@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0D0D0D">
+  <title>Admin Portal Login — Shan Gems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated background */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 20% 20%, rgba(201, 161, 74, 0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 80% 80%, rgba(10, 31, 68, 0.3) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .login-card {
+      background: rgba(1, 8, 22, 0.8);
+      border: 1px solid rgba(201, 161, 74, 0.15);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      padding: 3.5rem;
+      border-radius: 24px;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-card__logo {
+      width: 100px;
+      margin: 0 auto 2.5rem;
+      border-radius: 8px;
+    }
+
+    .login-card__eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .login-card__title {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .login-card__text {
+      font-size: 0.85rem;
+      color: var(--grey-light);
+      margin-bottom: 2.5rem;
+      opacity: 0.7;
+    }
+
+    .form-group { text-align: left; margin-bottom: 1.5rem; }
+
+    .login-error {
+      font-size: 0.8rem;
+      color: #f87171;
+      padding: 0.75rem 1rem;
+      background: rgba(248, 113, 113, 0.1);
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+      display: none;
+      border: 1px solid rgba(248, 113, 113, 0.2);
+    }
+
+    .login-error.show { display: block; }
+
+    .login-return {
+      display: inline-block;
+      margin-top: 2rem;
+      font-size: 0.72rem;
+      color: var(--grey);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .login-return:hover { color: var(--gold); }
+
+    .gem-decoration {
+      position: fixed;
+      z-index: 0;
+    }
+
+    .gem-decoration--1 { top: 10%; left: 5%; font-size: 8rem; opacity: 0.04; }
+    .gem-decoration--2 { bottom: 10%; right: 5%; font-size: 12rem; opacity: 0.03; }
+  </style>
+</head>
+<body>
+
+<div class="gem-decoration gem-decoration--1">💎</div>
+<div class="gem-decoration gem-decoration--2">🔴</div>
+
+<div class="login-card">
+  <img src="images/shan-gems-logo.jpg" alt="Shan Gems" class="login-card__logo">
+  <span class="login-card__eyebrow">Proprietor Portal</span>
+  <h1 class="login-card__title">Admin Access</h1>
+  <p class="login-card__text">Secure access to the Shan Gems management system.</p>
+
+  <div class="login-error" id="loginError">Invalid credentials. Please try again.</div>
+
+  <form id="loginForm">
+    <div class="form-group">
+      <label class="form-label">Admin Email</label>
+      <input type="email" id="email" class="form-input" placeholder="admin@shangems.com" required autocomplete="email">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Password</label>
+      <input type="password" id="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+    </div>
+    <button type="submit" class="btn btn--primary" id="loginBtn" style="width:100%; justify-content:center; margin-top:0.5rem;">
+      AUTHENTICATE →
+    </button>
+  </form>
+
+  <a href="index.html" class="login-return">← Return to Public Site</a>
+</div>
+
+<script>
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('loginBtn');
+    btn.textContent = 'AUTHENTICATING...';
+    btn.disabled = true;
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        localStorage.setItem('shangems_admin_token', data.token);
+        localStorage.setItem('shangems_admin_user', JSON.stringify(data.user));
+        window.location.href = 'admin.html';
+      } else {
+        document.getElementById('loginError').classList.add('show');
+        btn.textContent = 'AUTHENTICATE →';
+        btn.disabled = false;
+      }
+    } catch (err) {
+      // Demo mode — for testing without backend
+      if (email === 'admin@shangems.com' && password === 'admin123') {
+        localStorage.setItem('shangems_admin_token', 'demo_token');
+        localStorage.setItem('shangems_admin_user', JSON.stringify({ name: 'Sameera Fernando' }));
+        window.location.href = 'admin.html';
+      } else {
+        document.getElementById('loginError').classList.add('show');
+        btn.textContent = 'AUTHENTICATE →';
+        btn.disabled = false;
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

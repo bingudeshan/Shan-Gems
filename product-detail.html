@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View detailed specifications, origin tracing, and Digital Product Passports for our rare Ceylon gemstones. Certified by GIA and NGJA.">
+  <meta name="keywords" content="gemstone provenance, blockchain gem passport, Ceylon sapphire specs, GIA certified gems, luxury gemstone details">
+  <meta name="author" content="Sameera Fernando — Shan Gems">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0D0D0D">
+  <title>Gemstone Details & Provenance | Shan Gems Vault</title>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="product">
+  <meta property="og:title" content="Shan Gems — Rare Gemstone Detailed Passport">
+  <meta property="og:description" content="Detailed specifications and blockchain provenance for this ethically sourced Sri Lankan gemstone.">
+  <meta property="og:image" content="https://shangems.com/images/og-product-detail.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="Shan Gems — Rare Gemstone Detailed Passport">
+  <meta property="twitter:description" content="Detailed specifications and blockchain provenance for this ethically sourced Sri Lankan gemstone.">
+  <meta property="twitter:image" content="https://shangems.com/images/og-product-detail.jpg">
+
+  <!-- Structured Data (JSON-LD) will be injected dynamically by product-detail.js -->
+
+  <!-- Preload fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Three.js for 3D Viewer -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="product-detail-page">
+
+<!-- ═══════════════════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════════════════ -->
+<nav class="nav" id="mainNav" role="navigation" aria-label="Main navigation">
+  <div class="nav__inner">
+    <a href="index.html" class="nav__logo" aria-label="Shan Gems — Home">
+      <img src="images/shan-gems-logo.jpg" alt="Shan Gems" class="nav__logo-img" loading="lazy">
+    </a>
+
+    <ul class="nav__links" role="list">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="products.html" class="nav__link">Shop</a></li>
+        <li><a href="index.html#trustSection" class="nav__link">Provenance</a></li>
+        <li><a href="#footer" class="nav__link">Contact</a></li>
+    </ul>
+
+    <div class="nav__actions">
+      <!-- Currency -->
+      <select class="nav__currency-select" id="currencySelector" aria-label="Select currency">
+        <option value="USD">USD ($)</option>
+        <option value="LKR">LKR (Rs)</option>
+        <option value="EUR">EUR (€)</option>
+        <option value="GBP">GBP (£)</option>
+        <option value="JPY">JPY (¥)</option>
+      </select>
+      <button class="nav__icon-btn" id="cartBtn" aria-label="Open cart">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+        <span class="nav__cart-count" id="cartCount">0</span>
+      </button>
+      <button class="nav__menu-btn" id="menuBtn" aria-label="Toggle mobile menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div class="nav__drawer" id="navDrawer">
+    <a href="index.html" class="nav__drawer-link">Home</a>
+    <a href="products.html" class="nav__drawer-link">Shop</a>
+    <a href="index.html#trustSection" class="nav__drawer-link">Provenance</a>
+    <a href="#footer" class="nav__drawer-link">Contact</a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     DETAIL CONTENT
+═══════════════════════════════════════════════════════ -->
+<main class="container">
+  <!-- Hero Section -->
+  <section class="gem-hero" id="gemHero">
+    <!-- 360 Viewer -->
+    <div class="gem-viewer-container fade-up">
+      <div class="gem-viewer" id="gemViewer" role="img" aria-label="Interactive 360 gemstone view">
+        <!-- Rendered by JS -->
+      </div>
+      <div class="gem-viewer__hint">
+        <span>⟳</span> Drag to Rotate
+      </div>
+    </div>
+
+    <!-- Overview -->
+    <div class="gem-info fade-up">
+      <span class="gem-info__eyebrow" id="gemCategory">Gemstone</span>
+      <h1 class="gem-info__title" id="gemName">Loading...</h1>
+      <div class="gem-info__price" id="gemPrice">
+        <span>USD</span> --
+      </div>
+      
+      <div class="gem-info__actions">
+        <button class="btn btn--primary" id="addToCartBtn" style="width: 100%; justify-content: center;">ADD TO COLLECTION →</button>
+        <button class="btn btn--ghost" id="wishlistBtn" style="width: 100%; justify-content: center;">ADD TO WISHLIST</button>
+        <button class="btn btn--dark" id="consultBtn" style="width: 100%; justify-content: center;">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WHATSAPP CONSULTATION
+        </button>
+      </div>
+
+      <div style="font-size: 0.8rem; color: var(--grey-light); display: flex; gap: 1.5rem;">
+        <span>✓ Insured Worldwide Shipping</span>
+        <span>✓ Lifetime Provenance Guarantee</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- DPP Section -->
+  <section class="dpp-section fade-up">
+    <header class="dpp-header">
+      <span class="section-label">Transparency Engine</span>
+      <h2 class="section-title" style="font-size: 2.2rem;">Digital Product <em>Passport</em></h2>
+      <div class="divider"></div>
+      <span class="dpp-id" id="dppId">DPP-ID: --</span>
+    </header>
+
+    <div class="dpp-timeline" id="dppTimeline">
+      <!-- Steps rendered by JS -->
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+        <button class="btn btn--ghost" id="openDppModalBtn">VIEW BLOCKCHAIN CERTIFICATE →</button>
+    </div>
+  </section>
+
+  <!-- Technical Specs & Cert -->
+  <div class="detail-grid">
+    <!-- Specifications -->
+    <section class="fade-up">
+      <span class="section-label">Technical Data</span>
+      <h3 class="section-title" style="font-size: 1.8rem; margin-bottom: 2rem;">Specifications</h3>
+      <table class="spec-table" id="specTable">
+        <!-- Rows rendered by JS -->
+      </table>
+    </section>
+
+    <!-- Certification -->
+    <section class="fade-up">
+      <span class="section-label">Authenticity</span>
+      <h3 class="section-title" style="font-size: 1.8rem; margin-bottom: 2rem;">Certification</h3>
+      <div class="cert-card" id="certCard">
+        <div class="cert-logo" id="certLogo">🏅</div>
+        <div>
+          <div style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.4rem;" id="certTitle">Certifying Authority</div>
+          <p style="font-size: 0.82rem; color: var(--grey-light); line-height: 1.6;" id="certDesc">
+            Verification status: <span style="color: #4ADE80;">✓ Digitally Verified</span><br>
+            Certificate issued and blockchain-recorded.
+          </p>
+        </div>
+      </div>
+      <div style="margin-top: 2rem; background: var(--surface-3); border-radius: var(--radius); padding: 1.5rem; font-size: 0.8rem; color: var(--grey-light);">
+        <p><strong>Sustainability Note:</strong> This stone's carbon footprint has been calculated and disclosed in compliance with EU ESPR regulations.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- Reusing existing Modals (Cart) -->
+<div class="cart-overlay" id="cartOverlay">
+  <aside class="cart-sidebar">
+    <div class="cart__header">
+      <h2 class="cart__title">Your Collection</h2>
+      <button class="modal__close" id="cartClose">✕</button>
+    </div>
+    <div class="cart__body" id="cartBody"></div>
+    <div class="cart__footer">
+        <div class="cart__total">
+            <span class="cart__total-label">Order Total</span>
+            <span class="cart__total-value" id="cartTotal">USD 0</span>
+        </div>
+        <button class="btn btn--primary cart__checkout-btn" id="cartCheckoutBtn">Proceed to Payment →</button>
+    </div>
+  </aside>
+</div>
+
+<!-- Digital Product Passport Modal -->
+<div class="modal__overlay" id="dppModalOverlay">
+    <div class="dpp-modal">
+        <button class="modal__close" id="dppModalClose">✕</button>
+        <div class="dpp-modal__header">
+            <div class="dpp-modal__logo">💎</div>
+            <div>
+                <h2 class="dpp-modal__title">Blockchain Product Passport</h2>
+                <p class="dpp-modal__id" id="modalDppId">ID: --</p>
+            </div>
+        </div>
+        
+        <div class="dpp-modal__grid">
+            <div class="dpp-modal__card">
+                <span class="dpp-modal__label">Provenance</span>
+                <div class="dpp-modal__val" id="modalMine">--</div>
+                <div class="dpp-modal__meta" id="modalMinedDate">Mined: --</div>
+            </div>
+            <div class="dpp-modal__card">
+                <span class="dpp-modal__label">Cutter</span>
+                <div class="dpp-modal__val" id="modalCutter">--</div>
+                <div class="dpp-modal__meta" id="modalCutDate">--</div>
+            </div>
+            <div class="dpp-modal__card">
+                <span class="dpp-modal__label">Sustainability</span>
+                <div class="dpp-modal__val" id="modalCarbon">-- CO₂e</div>
+                <div class="dpp-modal__meta">EU ESPR Compliant</div>
+            </div>
+            <div class="dpp-modal__card">
+                <span class="dpp-modal__label">Treatment</span>
+                <div class="dpp-modal__val" id="modalTreatment">--</div>
+                <div class="dpp-modal__meta">Verified Natural</div>
+            </div>
+        </div>
+
+        <div class="dpp-modal__verification">
+            <div style="color: #4ADE80; font-weight: 500; margin-bottom: 0.5rem;">● VERIFIED SMART CONTRACT</div>
+            <p style="font-size: 0.75rem; color: var(--grey-light); overflow-wrap: break-word; font-family: monospace;">
+                0x71C7656EC7ab88b098defB751B7401B5f6d8976F...
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- WhatsApp Floating Widget -->
+<a href="https://wa.me/94777866799" class="whatsapp-widget" id="whatsappWidget" target="_blank" rel="noopener" aria-label="Chat with a Gemologist on WhatsApp">
+    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <img src="images/shan-gems-logo.jpg" alt="Shan Gems" class="footer__logo-img" loading="lazy">
+          <p class="footer__desc footer__desc--logo">
+            A heritage gemstone enterprise connecting the world's wealth hunters with ethically sourced Ceylon stones since 2013.
+          </p>
+        </div>
+        <div>
+          <div class="footer__col-title">Collection</div>
+          <a href="products.html" class="footer__link">Sapphires</a>
+          <a href="products.html" class="footer__link">Rubies</a>
+          <a href="products.html" class="footer__link">Rare Stones</a>
+        </div>
+        <div>
+          <div class="footer__col-title">Service</div>
+          <a href="#" class="footer__link">Certification</a>
+          <a href="#" class="footer__link">AR Try-On</a>
+          <a href="#" class="footer__link">Private Viewing</a>
+        </div>
+        <div>
+          <div class="footer__col-title">Contact</div>
+          <div class="footer__contact-item">📞 +94 777 866 799</div>
+          <div class="footer__contact-item">✉ shangems2013@gmail.com</div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 Shan Gems. All rights reserved.</span>
+        <div class="footer__ngja">🏅 Internationally Recognized Certificates</div>
+      </div>
+    </div>
+</footer>
+
+<!-- Checkout Modal -->
+<div class="modal-overlay" id="checkoutModalOverlay" role="dialog" aria-modal="true">
+  <div class="modal modal--checkout" style="max-width: 500px;">
+    <div class="modal__header">
+      <h2 class="modal__title">Secure Checkout</h2>
+      <button class="modal__close" id="closeCheckoutModal">✕</button>
+    </div>
+    <div class="modal__body" style="padding: 2rem;">
+      <form id="checkoutForm">
+        <h3 style="font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 1rem; color: var(--gold);">1. Shipping Details</h3>
+        <div class="form-group">
+          <label class="form-label" for="chk-name">Full Name</label>
+          <input type="text" id="chk-name" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="chk-email">Email Address</label>
+          <input type="email" id="chk-email" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="chk-address">Shipping Address</label>
+          <textarea id="chk-address" class="form-input" rows="2" required></textarea>
+        </div>
+
+        <h3 style="font-family: var(--font-serif); font-size: 1.25rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--gold);">2. Payment Method</h3>
+        <div class="form-group">
+          <label style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; cursor: pointer;">
+            <input type="radio" name="paymentMethod" value="card" checked> Credit / Debit Card (Stripe)
+          </label>
+          <div id="cardDetails" style="background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 1rem;">
+            <div class="form-group" style="margin-bottom: 0.5rem;">
+              <input type="text" class="form-input" placeholder="Card Number (Mock)" pattern="[0-9]{16}">
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              <input type="text" class="form-input" placeholder="MM/YY" style="flex:1;">
+              <input type="text" class="form-input" placeholder="CVC" style="flex:1;">
+            </div>
+          </div>
+
+          <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+            <input type="radio" name="paymentMethod" value="wire"> Bank Wire Transfer
+          </label>
+          <p id="wireDetails" style="display: none; font-size: 0.8rem; color: var(--grey-light); margin-top: 0.5rem; margin-left: 1.5rem;">
+            You will receive an invoice with our banking details. Order processes upon receipt of funds.
+          </p>
+        </div>
+        
+        <div style="margin-top: 2rem; border-top: 1px solid rgba(201,168,76,0.2); padding-top: 1.5rem;">
+          <button type="submit" class="btn btn--primary" id="confirmOrderBtn" style="width: 100%; justify-content: center;">Place Order <span id="checkoutTotal" style="margin-left: 5px;">$0</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="product-detail.js"></script>
+</body>
+</html>
