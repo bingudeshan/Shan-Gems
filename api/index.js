@@ -38,15 +38,9 @@ const upload = multer({
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('./')); // Serve static frontend files
-app.use('/uploads', express.static('uploads')); // Serve image assets
 
-// Explicit Page Routing (Ensures Vercel serves HTML correctly)
-app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
-app.get('/products', (req, res) => res.sendFile(path.join(__dirname, 'products.html')));
-app.get('/admin', (req, res) => res.sendFile(path.join(__dirname, 'admin.html')));
-app.get('/admin-login', (req, res) => res.sendFile(path.join(__dirname, 'admin-login.html')));
-app.get('/product-detail', (req, res) => res.sendFile(path.join(__dirname, 'product-detail.html')));
+// Note: Static files (HTML, CSS, JS, Images) are served natively by Vercel from the /public directory.
+// API routes below will handle all dynamic database operations.
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI)
