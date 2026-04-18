@@ -20,15 +20,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET || 'shan_gems_secure_secret_2026';
 
-// ── Multer Storage Configuration ──
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
-});
+// ── Multer Storage Configuration (Memory for Vercel compatibility) ──
+const storage = multer.memoryStorage();
 
 const upload = multer({ 
   storage: storage,
@@ -243,7 +236,9 @@ app.post('/api/products', authenticate, upload.single('image'), async (req, res)
   try {
     const productData = req.body;
     if (req.file) {
-      productData.image = `/uploads/${req.file.filename}`;
+      // Convert buffer to Base64 Data URI
+      const base64Image = req.file.buffer.toString('base64');
+      productData.image = `data:${req.file.mimetype};base64,${base64Image}`;
     }
     const newProduct = new Product(productData);
     await newProduct.save();
@@ -258,8 +253,11 @@ app.put('/api/products/:id', authenticate, upload.single('image'), async (req, r
   try {
     const { id } = req.params;
     const updateData = req.body;
+    
     if (req.file) {
-      updateData.image = `/uploads/${req.file.filename}`;
+      // Convert buffer to Base64 Data URI
+      const base64Image = req.file.buffer.toString('base64');
+      updateData.image = `data:${req.file.mimetype};base64,${base64Image}`;
     }
     
     // Find by _id first, then fallback to custom id
