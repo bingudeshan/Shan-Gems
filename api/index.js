@@ -39,8 +39,12 @@ const upload = multer({
 app.use(cors());
 app.use(bodyParser.json());
 
-// Note: Static files (HTML, CSS, JS, Images) are served natively by Vercel from the /public directory.
-// API routes below will handle all dynamic database operations.
+// Serve static files (HTML, CSS, JS, Images)
+// On Vercel, this is handled by vercel.json rewrites.
+// Locally, we serve them explicitly from the /public folder.
+if (process.env.NODE_ENV !== 'production') {
+  app.use(express.static(path.join(__dirname, '../public')));
+}
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI)
