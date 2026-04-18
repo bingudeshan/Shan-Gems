@@ -176,9 +176,10 @@ app.post(['/api/auth/login', '/api/login'], async (req, res) => {
 async function seedAdmin() {
   try {
     const adminEmail = 'admin@shangems.com';
+    const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD || 'admin123', 10);
     const exists = await User.findOne({ email: adminEmail });
+    
     if (!exists) {
-      const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD || 'admin123', 10);
       const admin = new User({
         email: adminEmail,
         password: hashedPassword,
@@ -186,6 +187,9 @@ async function seedAdmin() {
       });
       await admin.save();
       console.log('✓ Default Admin User Seeded');
+    } else {
+      await User.findOneAndUpdate({ email: adminEmail }, { password: hashedPassword });
+      console.log('✓ Admin User Password Updated');
     }
   } catch (err) {
     console.error('✕ Error seeding admin:', err);
