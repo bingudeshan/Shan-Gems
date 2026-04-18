@@ -43,7 +43,7 @@ app.use(bodyParser.json());
 // On Vercel, this is handled by vercel.json rewrites.
 // Locally, we serve them explicitly from the /public folder.
 if (process.env.NODE_ENV !== 'production') {
-  app.use(express.static(path.join(__dirname, '../public')));
+  app.use(express.static(path.join(__dirname, '../')));
 }
 
 // MongoDB Connection

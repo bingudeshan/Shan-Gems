@@ -2,7 +2,7 @@
   "name": "shan-gems-platform",
   "version": "1.0.0",
   "description": "Luxury Gemstone Platform with MongoDB Backend",
-  "main": "api/index.js",
+
   "scripts": {
     "start": "node api/index.js",
     "dev": "nodemon api/index.js"
