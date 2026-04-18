@@ -48,7 +48,11 @@ if (process.env.NODE_ENV !== 'production') {
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('✓ Connected to Shan Gems MongoDB Atlas'))
+  .then(async () => {
+    console.log('✓ Connected to Shan Gems MongoDB Atlas');
+    // Seed admin as soon as the database is connected
+    await seedAdmin();
+  })
   .catch(err => console.error('✕ MongoDB connection error:', err));
 
 /* ─── SCHEMAS & MODELS ──────────────────────────────────── */
@@ -443,8 +447,6 @@ app.get('/api/admin/stats', authenticate, async (req, res) => {
 if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, async () => {
     console.log(`✓ Shan Gems Backend Live at http://localhost:${PORT}`);
-    // Seed admin if not exists
-    await seedAdmin();
   });
 }
 
