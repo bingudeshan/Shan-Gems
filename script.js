@@ -15,16 +15,21 @@ const CURRENCIES = {
 // Hardcoded PRODUCTS array removed for live-data compliance.
 
 const CATEGORIES = [
-  { id: 'sapphire', name: 'Gems', count: 42, img: 'images/cat-sapphire.png', cls: 'cat--sapphire' },
-  { id: 'ruby', name: 'Ruby', count: 18, img: 'images/cat-ruby.png', cls: 'cat--ruby' },
-  { id: 'diamond', name: 'Diamond', count: 12, img: 'images/cat-diamond.png', cls: 'cat--diamond' },
-  { id: 'emerald', name: 'Emerald', count: 15, img: 'images/cat-emerald.png', cls: 'cat--emerald' },
-  { id: 'alexandrite', name: 'Alexandrite', count: 9, img: 'images/cat-alexandrite.png', cls: 'cat--alexandrite' },
-  { id: 'pearl', name: 'Pearl', count: 24, img: 'images/cat-pearl.png', cls: 'cat--pearl' },
-  { id: 'garnet', name: 'Garnet', count: 14, img: null, cls: 'cat--garnet' },
-  { id: 'aquamarine', name: 'Aquamarine', count: 11, img: null, cls: 'cat--aqua' },
-  { id: 'opal', name: 'Opal', count: 7, img: null, cls: 'cat--opal' },
-  { id: 'tourmaline', name: 'Tourmaline', count: 10, img: null, cls: 'cat--tourmaline' }
+  { id: 'sapphire',         name: 'Sapphire',          count: 42, img: 'images/cat-sapphire.png',    cls: 'cat--sapphire' },
+  { id: 'ruby',             name: 'Ruby',               count: 18, img: 'images/cat-ruby.png',        cls: 'cat--ruby' },
+  { id: 'alexandrite',      name: 'Alexandrite',        count: 9,  img: 'images/cat-alexandrite.png', cls: 'cat--alexandrite' },
+  { id: 'chrysoberyl',      name: 'Chrysoberyl',        count: 7,  img: 'images/cat-chrysoberyl.png', cls: 'cat--chrysoberyl' },
+  { id: 'spinel',           name: 'Spinel',             count: 11, img: null,                         cls: 'cat--spinel' },
+  { id: 'garnet',           name: 'Garnet',             count: 14, img: null,                         cls: 'cat--garnet' },
+  { id: 'zircon',           name: 'Zircon',             count: 8,  img: null,                         cls: 'cat--zircon' },
+  { id: 'topaz',            name: 'Topaz',              count: 12, img: null,                         cls: 'cat--topaz' },
+  { id: 'aquamarine',       name: 'Aquamarine',         count: 11, img: null,                         cls: 'cat--aqua' },
+  { id: 'moonstone',        name: 'Moonstone',          count: 6,  img: null,                         cls: 'cat--moonstone' },
+  { id: 'quartz',           name: 'Quartz',             count: 15, img: null,                         cls: 'cat--quartz' },
+  { id: 'opal',             name: 'Opal',               count: 7,  img: null,                         cls: 'cat--opal' },
+  { id: 'crystal',          name: 'Crystal',            count: 9,  img: null,                         cls: 'cat--crystal' },
+  { id: 'ornamental',       name: 'Ornamental Stones',  count: 20, img: null,                         cls: 'cat--ornamental' },
+  { id: 'other',            name: 'Other Material',     count: 5,  img: null,                         cls: 'cat--other' }
 ];
 
 /* ─── STATE ─────────────────────────────────────────────── */

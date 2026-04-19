@@ -770,21 +770,25 @@ body::before {
 .category-card:hover .category-card__arrow { opacity: 1; transform: translateX(0); }
 
 /* gem colour patches — used as fallback background when no image is set */
-.cat--sapphire { background: radial-gradient(circle at 40% 35%, rgba(37,99,235,0.35) 0%, rgba(10,20,60,0.9) 100%); }
-.cat--ruby { background: radial-gradient(circle at 40% 35%, rgba(185,28,28,0.45) 0%, rgba(50,5,10,0.95) 100%); }
-.cat--diamond { background: radial-gradient(circle at 40% 35%, rgba(180,210,255,0.3) 0%, rgba(20,30,50,0.95) 100%); }
-.cat--emerald { background: radial-gradient(circle at 40% 35%, rgba(22,163,74,0.4) 0%, rgba(5,30,15,0.95) 100%); }
-.cat--alexandrite { background: radial-gradient(circle at 40% 35%, rgba(91,44,111,0.45) 0%, rgba(10,30,25,0.95) 100%); }
-.cat--pearl { background: radial-gradient(circle at 40% 35%, rgba(200,210,220,0.3) 0%, rgba(15,20,35,0.95) 100%); }
-.cat--garnet { background: radial-gradient(circle at 40% 35%, rgba(155,28,28,0.45) 0%, rgba(40,5,5,0.95) 100%); }
-.cat--aqua { background: radial-gradient(circle at 40% 35%, rgba(14,165,233,0.4) 0%, rgba(5,25,45,0.95) 100%); }
-.cat--opal { background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.35) 0%, rgba(15,10,35,0.95) 100%); }
-.cat--tourmaline { background: radial-gradient(circle at 40% 35%, rgba(236,72,153,0.4) 0%, rgba(40,5,25,0.95) 100%); }
-.cat--spinel { background: radial-gradient(circle at 40% 35%, rgba(201,168,76,0.3), rgba(139,105,20,0.2)); }
-.cat--padparadscha { background: radial-gradient(circle at 40% 35%, rgba(220,120,60,0.3), rgba(155,35,53,0.2)); }
+.cat--sapphire    { background: radial-gradient(circle at 40% 35%, rgba(37,99,235,0.6) 0%, rgba(10,20,60,0.97) 100%); }
+.cat--ruby        { background: radial-gradient(circle at 40% 35%, rgba(185,28,28,0.65) 0%, rgba(50,5,10,0.97) 100%); }
+.cat--alexandrite { background: radial-gradient(circle at 40% 35%, rgba(20,160,100,0.55) 0%, rgba(10,30,25,0.97) 100%); }
+.cat--chrysoberyl { background: radial-gradient(circle at 40% 35%, rgba(202,172,22,0.6) 0%, rgba(40,35,5,0.97) 100%); }
+.cat--spinel      { background: radial-gradient(circle at 40% 35%, rgba(220,50,120,0.6) 0%, rgba(60,5,30,0.97) 100%); }
+.cat--garnet      { background: radial-gradient(circle at 40% 35%, rgba(155,28,28,0.65) 0%, rgba(40,5,5,0.97) 100%); }
+.cat--zircon      { background: radial-gradient(circle at 40% 35%, rgba(14,165,233,0.6) 0%, rgba(5,20,50,0.97) 100%); }
+.cat--topaz       { background: radial-gradient(circle at 40% 35%, rgba(220,140,20,0.6) 0%, rgba(50,25,5,0.97) 100%); }
+.cat--aqua        { background: radial-gradient(circle at 40% 35%, rgba(6,182,212,0.6) 0%, rgba(5,25,45,0.97) 100%); }
+.cat--moonstone   { background: radial-gradient(circle at 40% 35%, rgba(180,195,220,0.45) 0%, rgba(15,20,40,0.97) 100%); }
+.cat--quartz      { background: radial-gradient(circle at 40% 35%, rgba(160,200,240,0.4) 0%, rgba(20,25,40,0.97) 100%); }
+.cat--opal        { background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.55) 0%, rgba(15,10,35,0.97) 100%); }
+.cat--crystal     { background: radial-gradient(circle at 40% 35%, rgba(200,230,255,0.35) 0%, rgba(10,15,30,0.97) 100%); }
+.cat--ornamental  { background: radial-gradient(circle at 40% 35%, rgba(130,90,40,0.55) 0%, rgba(30,15,5,0.97) 100%); }
+.cat--other       { background: radial-gradient(circle at 40% 35%, rgba(100,100,120,0.5) 0%, rgba(15,15,25,0.97) 100%); }
 
-@media (min-width: 600px) { .categories__grid { grid-template-columns: repeat(3, 1fr); } .category-card--featured { grid-column: span 1; aspect-ratio: 1; } }
-@media (min-width: 900px) { .categories__grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 600px)  { .categories__grid { grid-template-columns: repeat(3, 1fr); } .category-card--featured { grid-column: span 1; aspect-ratio: 1; } }
+@media (min-width: 900px)  { .categories__grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1200px) { .categories__grid { grid-template-columns: repeat(5, 1fr); } }
 
 /* ── PRODUCT GRID ──────────────────────────────────────── */
 .products {
