@@ -39,14 +39,46 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(express.static(path.join(__dirname, '../')));
 }
 
-// MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(async () => {
-    console.log('✓ Connected to Shan Gems MongoDB Atlas');
-    // Seed admin as soon as the database is connected
-    await seedAdmin();
-  })
-  .catch(err => console.error('✕ MongoDB connection error:', err));
+// ── MongoDB Connection Logic (Optimized for Vercel/Serverless) ──
+let cachedDb = null;
+
+async function connectDB() {
+  if (cachedDb) {
+    // Check if the connection is still alive
+    if (mongoose.connection.readyState === 1) return cachedDb;
+  }
+
+  console.log('... Connecting to MongoDB Atlas');
+  try {
+    const db = await mongoose.connect(process.env.MONGODB_URI, {
+      bufferCommands: false, // Disable buffering to catch connection issues immediately
+    });
+    cachedDb = db;
+    console.log('✓ Database connected');
+    return cachedDb;
+  } catch (err) {
+    console.error('✕ Database connection failed:', err.message);
+    throw err;
+  }
+}
+
+// Middleware to ensure DB connection before handling requests
+const ensureDb = async (req, res, next) => {
+  try {
+    await connectDB();
+    // One-time seed check if connected
+    if (req.app.get('adminSeeded') !== true) {
+      await seedAdmin();
+      req.app.set('adminSeeded', true);
+    }
+    next();
+  } catch (err) {
+    res.status(503).json({ error: 'Database connection failed. Please check your IP whitelist in MongoDB Atlas.' });
+  }
+};
+
+// Apply DB connection check to all API routes
+app.use('/api', ensureDb);
 
 /* ─── SCHEMAS & MODELS ──────────────────────────────────── */
 
@@ -78,7 +110,7 @@ const productSchema = new mongoose.Schema({
   updatedAt: { type: Date, default: Date.now }
 });
 
-const Product = mongoose.model('Product', productSchema);
+const Product = mongoose.models.Product || mongoose.model('Product', productSchema);
 
 // User Schema
 const userSchema = new mongoose.Schema({
@@ -93,7 +125,7 @@ const userSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.models.User || mongoose.model('User', userSchema);
 
 // Order Schema
 const orderSchema = new mongoose.Schema({
@@ -108,7 +140,7 @@ const orderSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-const Order = mongoose.model('Order', orderSchema);
+const Order = mongoose.models.Order || mongoose.model('Order', orderSchema);
 
 // Inquiry Schema
 const inquirySchema = new mongoose.Schema({
@@ -119,7 +151,7 @@ const inquirySchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
-const Inquiry = mongoose.model('Inquiry', inquirySchema);
+const Inquiry = mongoose.models.Inquiry || mongoose.model('Inquiry', inquirySchema);
 
 /* ─── MIDDLEWARE ────────────────────────────────────────── */
 
