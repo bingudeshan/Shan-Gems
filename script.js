@@ -24,12 +24,12 @@ const CATEGORIES = [
   { id: 'zircon',           name: 'Zircon',             count: 8,  img: 'images/cat-zircon.png',      cls: 'cat--zircon' },
   { id: 'topaz',            name: 'Topaz',              count: 12, img: 'images/cat-topaz.png',       cls: 'cat--topaz' },
   { id: 'aquamarine',       name: 'Aquamarine',         count: 11, img: 'images/cat-aquamarine.png', cls: 'cat--aqua' },
-  { id: 'moonstone',        name: 'Moonstone',          count: 6,  img: null,                         cls: 'cat--moonstone' },
-  { id: 'quartz',           name: 'Quartz',             count: 15, img: null,                         cls: 'cat--quartz' },
-  { id: 'opal',             name: 'Opal',               count: 7,  img: null,                         cls: 'cat--opal' },
-  { id: 'crystal',          name: 'Crystal',            count: 9,  img: null,                         cls: 'cat--crystal' },
-  { id: 'ornamental',       name: 'Ornamental Stones',  count: 20, img: null,                         cls: 'cat--ornamental' },
-  { id: 'other',            name: 'Other Material',     count: 5,  img: null,                         cls: 'cat--other' }
+  { id: 'moonstone',        name: 'Moonstone',          count: 6,  img: 'images/cat-moonstone.png',   cls: 'cat--moonstone' },
+  { id: 'quartz',           name: 'Quartz',             count: 15, img: 'images/cat-quartz.png',      cls: 'cat--quartz' },
+  { id: 'opal',             name: 'Opal',               count: 7,  img: 'images/cat-opal.png',        cls: 'cat--opal' },
+  { id: 'crystal',          name: 'Crystal',            count: 9,  img: 'images/cat-crystal.png',     cls: 'cat--crystal' },
+  { id: 'ornamental',       name: 'Ornamental Stones',  count: 20, img: 'images/cat-ornamental.png',  cls: 'cat--ornamental' },
+  { id: 'other',            name: 'Other Material',     count: 5,  img: 'images/cat-other.png',       cls: 'cat--other' }
 ];
 
 /* ─── STATE ─────────────────────────────────────────────── */
