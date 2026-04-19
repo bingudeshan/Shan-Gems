@@ -685,10 +685,32 @@ body::before {
   background: var(--surface);
   box-shadow: var(--shadow);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: transform var(--transition), box-shadow var(--transition);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
 }
-.category-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(10,31,68,0.1); border-color: rgba(201,161,74,0.4); }
+.category-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(0,0,0,0.5); border-color: rgba(201,161,74,0.5); }
 .category-card--featured { grid-column: span 2; aspect-ratio: 2/1; }
+
+/* Cards with real images: scale image on hover */
+.category-card--has-img {
+  background-size: cover !important;
+  background-position: center !important;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+.category-card--has-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: inherit;
+  background-size: inherit;
+  background-position: inherit;
+  transition: transform 0.6s cubic-bezier(0.2, 0, 0.2, 1);
+  z-index: 0;
+}
+.category-card--has-img:hover::before {
+  transform: scale(1.08);
+}
+
+/* Legacy emoji gem icon (kept for no-image fallback) */
 .category-card__gem {
   position: absolute;
   inset: 0;
@@ -697,23 +719,30 @@ body::before {
   justify-content: center;
   font-size: clamp(3rem, 10vw, 6rem);
   transition: transform 0.5s ease;
+  z-index: 1;
 }
 .category-card:hover .category-card__gem { transform: scale(1.1) rotate(-5deg); }
 .category-card__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(13,13,13,0.95) 0%, transparent 60%);
+  background: linear-gradient(to top,
+    rgba(5,10,25,0.97) 0%,
+    rgba(5,10,25,0.55) 45%,
+    rgba(5,10,25,0.12) 75%,
+    transparent 100%);
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  z-index: 2;
 }
 .category-card__name {
   font-family: var(--font-serif);
   font-size: clamp(1.2rem, 3vw, 1.6rem);
   font-weight: 400;
-  color: var(--royal-blue);
+  color: #ffffff;
   margin-bottom: 0.25rem;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.6);
 }
 .category-card__count {
   font-size: 0.65rem;
@@ -726,23 +755,33 @@ body::before {
   top: 1rem; right: 1rem;
   width: 32px; height: 32px;
   border-radius: 50%;
-  border: 1px solid rgba(201,168,76,0.3);
+  border: 1px solid rgba(201,168,76,0.4);
+  background: rgba(0,0,0,0.4);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   display: flex; align-items: center; justify-content: center;
   color: var(--gold);
   font-size: 0.8rem;
   opacity: 0;
   transform: translateX(-8px);
   transition: opacity var(--transition), transform var(--transition);
+  z-index: 3;
 }
 .category-card:hover .category-card__arrow { opacity: 1; transform: translateX(0); }
 
-/* gem colour patches */
-.cat--sapphire .category-card__gem { background: radial-gradient(circle at 40% 35%, rgba(37,99,235,0.3), rgba(30,58,95,0.2)); }
-.cat--ruby .category-card__gem { background: radial-gradient(circle at 40% 35%, rgba(155,35,53,0.3), rgba(100,10,20,0.2)); }
-.cat--emerald .category-card__gem { background: radial-gradient(circle at 40% 35%, rgba(27,94,64,0.3), rgba(10,60,30,0.2)); }
-.cat--alexandrite .category-card__gem { background: radial-gradient(circle at 40% 35%, rgba(91,44,111,0.3), rgba(27,94,64,0.2)); }
-.cat--spinel .category-card__gem { background: radial-gradient(circle at 40% 35%, rgba(201,168,76,0.3), rgba(139,105,20,0.2)); }
-.cat--padparadscha .category-card__gem { background: radial-gradient(circle at 40% 35%, rgba(220,120,60,0.3), rgba(155,35,53,0.2)); }
+/* gem colour patches — used as fallback background when no image is set */
+.cat--sapphire { background: radial-gradient(circle at 40% 35%, rgba(37,99,235,0.35) 0%, rgba(10,20,60,0.9) 100%); }
+.cat--ruby { background: radial-gradient(circle at 40% 35%, rgba(185,28,28,0.45) 0%, rgba(50,5,10,0.95) 100%); }
+.cat--diamond { background: radial-gradient(circle at 40% 35%, rgba(180,210,255,0.3) 0%, rgba(20,30,50,0.95) 100%); }
+.cat--emerald { background: radial-gradient(circle at 40% 35%, rgba(22,163,74,0.4) 0%, rgba(5,30,15,0.95) 100%); }
+.cat--alexandrite { background: radial-gradient(circle at 40% 35%, rgba(91,44,111,0.45) 0%, rgba(10,30,25,0.95) 100%); }
+.cat--pearl { background: radial-gradient(circle at 40% 35%, rgba(200,210,220,0.3) 0%, rgba(15,20,35,0.95) 100%); }
+.cat--garnet { background: radial-gradient(circle at 40% 35%, rgba(155,28,28,0.45) 0%, rgba(40,5,5,0.95) 100%); }
+.cat--aqua { background: radial-gradient(circle at 40% 35%, rgba(14,165,233,0.4) 0%, rgba(5,25,45,0.95) 100%); }
+.cat--opal { background: radial-gradient(circle at 40% 35%, rgba(168,85,247,0.35) 0%, rgba(15,10,35,0.95) 100%); }
+.cat--tourmaline { background: radial-gradient(circle at 40% 35%, rgba(236,72,153,0.4) 0%, rgba(40,5,25,0.95) 100%); }
+.cat--spinel { background: radial-gradient(circle at 40% 35%, rgba(201,168,76,0.3), rgba(139,105,20,0.2)); }
+.cat--padparadscha { background: radial-gradient(circle at 40% 35%, rgba(220,120,60,0.3), rgba(155,35,53,0.2)); }
 
 @media (min-width: 600px) { .categories__grid { grid-template-columns: repeat(3, 1fr); } .category-card--featured { grid-column: span 1; aspect-ratio: 1; } }
 @media (min-width: 900px) { .categories__grid { grid-template-columns: repeat(3, 1fr); } }

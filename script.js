@@ -15,16 +15,16 @@ const CURRENCIES = {
 // Hardcoded PRODUCTS array removed for live-data compliance.
 
 const CATEGORIES = [
-  { id: 'sapphire', name: 'Gems', count: 42, emoji: '💎', cls: 'cat--sapphire' },
-  { id: 'ruby', name: 'Ruby', count: 18, emoji: '🔴', cls: 'cat--ruby' },
-  { id: 'diamond', name: 'Diamond', count: 12, emoji: '✨', cls: 'cat--diamond' },
-  { id: 'emerald', name: 'Emerald', count: 15, emoji: '💚', cls: 'cat--emerald' },
-  { id: 'alexandrite', name: 'Alexandrite', count: 9, emoji: '🟣', cls: 'cat--alexandrite' },
-  { id: 'pearl', name: 'Pearl', count: 24, emoji: '🐚', cls: 'cat--pearl' },
-  { id: 'garnet', name: 'Garnet', count: 14, emoji: '🍷', cls: 'cat--garnet' },
-  { id: 'aquamarine', name: 'Aquamarine', count: 11, emoji: '❄️', cls: 'cat--aqua' },
-  { id: 'opal', name: 'Opal', count: 7, emoji: '🌈', cls: 'cat--opal' },
-  { id: 'tourmaline', name: 'Tourmaline', count: 10, emoji: '🍉', cls: 'cat--tourmaline' }
+  { id: 'sapphire', name: 'Gems', count: 42, img: 'images/cat-sapphire.png', cls: 'cat--sapphire' },
+  { id: 'ruby', name: 'Ruby', count: 18, img: 'images/cat-ruby.png', cls: 'cat--ruby' },
+  { id: 'diamond', name: 'Diamond', count: 12, img: 'images/cat-diamond.png', cls: 'cat--diamond' },
+  { id: 'emerald', name: 'Emerald', count: 15, img: 'images/cat-emerald.png', cls: 'cat--emerald' },
+  { id: 'alexandrite', name: 'Alexandrite', count: 9, img: 'images/cat-alexandrite.png', cls: 'cat--alexandrite' },
+  { id: 'pearl', name: 'Pearl', count: 24, img: 'images/cat-pearl.png', cls: 'cat--pearl' },
+  { id: 'garnet', name: 'Garnet', count: 14, img: null, cls: 'cat--garnet' },
+  { id: 'aquamarine', name: 'Aquamarine', count: 11, img: null, cls: 'cat--aqua' },
+  { id: 'opal', name: 'Opal', count: 7, img: null, cls: 'cat--opal' },
+  { id: 'tourmaline', name: 'Tourmaline', count: 10, img: null, cls: 'cat--tourmaline' }
 ];
 
 /* ─── STATE ─────────────────────────────────────────────── */
@@ -108,13 +108,14 @@ function initCurrencySelector() {
 /* ─── RENDER CATEGORIES ─────────────────────────────────── */
 function renderCategories() {
   const grid = $('categoryGrid');
-  grid.innerHTML = CATEGORIES.map((cat, i) => `
-    <div class="category-card ${cat.cls} ${i === 0 ? 'category-card--featured' : ''} fade-up"
-         data-category="${cat.id}" role="button" tabindex="0" aria-label="Browse ${cat.name}">
-      <div class="category-card__gem">
-        <span aria-hidden="true">${cat.emoji}</span>
-        <!-- WebGL canvas slot: <canvas id="cat-canvas-${cat.id}" class="hero__canvas-placeholder"></canvas> -->
-      </div>
+  grid.innerHTML = CATEGORIES.map((cat, i) => {
+    const imgStyle = cat.img
+      ? `style="background-image: url('${cat.img}'); background-size: cover; background-position: center;"`
+      : '';
+    return `
+    <div class="category-card ${cat.cls} ${i === 0 ? 'category-card--featured' : ''} ${cat.img ? 'category-card--has-img' : ''} fade-up"
+         data-category="${cat.id}" role="button" tabindex="0" aria-label="Browse ${cat.name}"
+         ${imgStyle}>
       <div class="category-card__overlay">
         <div>
           <div class="category-card__name">${cat.name}</div>
@@ -123,7 +124,8 @@ function renderCategories() {
       </div>
       <div class="category-card__arrow" aria-hidden="true">→</div>
     </div>
-  `).join('');
+  `;
+  }).join('');
 
   // Click → filter products
   grid.querySelectorAll('.category-card').forEach(card => {
