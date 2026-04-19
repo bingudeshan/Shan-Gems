@@ -10,7 +10,7 @@ const SEED_PRODUCTS = [
   { id: 'sg-001', name: 'Ceylon Blue Sapphire', category: 'sapphire', shape: 'round', carat: 4.82, price: 4850, origin: 'Rathnapura, Sri Lanka', emoji: '💎', details: '4.82 ct · Heat Treated · Oval Cut', badges: ['GIA Certified'] },
   { id: 'sg-002', name: 'Alexandrite', category: 'alexandrite', shape: 'oval', carat: 2.15, price: 12500, origin: 'Okkampitiya, Sri Lanka', emoji: '🟣', details: '2.15 ct · Natural · Cushion Cut', badges: ['AGL Certified', 'Rare'] },
   { id: 'sg-003', name: 'Padparadscha Sapphire', category: 'padparadscha', shape: 'round', carat: 1.87, price: 9200, origin: 'Elahera, Sri Lanka', emoji: '🟠', details: '1.87 ct · Unheated · Oval Cut', badges: ['Lotus Certified'] },
-  { id: 'sg-004', name: 'Star Ruby', category: 'ruby', shape: 'oval', carat: 5.30, price: 6750, origin: 'Monaragala, Sri Lanka', emoji: '🔴', details: '5.30 ct · Natural Star · Cabochon', badges: ['Internationally Recognized Certificates'] },
+  { id: 'sg-004', name: 'Star Ruby', category: 'ruby', shape: 'oval', carat: 5.30, price: 6750, origin: 'Monaragala, Sri Lanka', emoji: '🔴', details: '5.30 ct · Natural Star · Cabochon', badges: ['Internationally recognized certificates'] },
   { id: 'sg-005', name: 'Tsavorite Garnet', category: 'garnet', shape: 'round', carat: 3.44, price: 3100, origin: 'Ratnapura, Sri Lanka', emoji: '💚', details: '3.44 ct · Natural · Round Brilliant', badges: ['GIA Certified'] },
   { id: 'sg-006', name: 'Yellow Sapphire', category: 'sapphire', shape: 'round', carat: 6.12, price: 5400, origin: 'Ratnapura, Sri Lanka', emoji: '💛', details: '6.12 ct · Heat Treated · Cushion Cut', badges: ['GIA Certified'] },
   { id: 'sg-007', name: 'Rare Emerald', category: 'emerald', shape: 'emerald-cut', carat: 2.50, price: 15400, origin: 'Colombia', emoji: '💚', details: '2.50 ct · Emerald Cut', badges: ['Investment Grade'] },
@@ -506,7 +506,7 @@ function initCharts() {
   new Chart(document.getElementById('categoryChart'), {
     type: 'doughnut',
     data: {
-      labels: ['Sapphire', 'Ruby', 'Alexandrite', 'Padparadscha', 'Emerald', 'Spinel'],
+      labels: ['Gems', 'Ruby', 'Alexandrite', 'Padparadscha', 'Emerald', 'Spinel'],
       datasets: [{
         data: [42, 18, 9, 6, 27, 15],
         backgroundColor: ['#2563EB', '#9B1C1C', '#6B21A8', '#EA580C', '#065F46', '#78350F'],

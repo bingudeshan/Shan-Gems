@@ -15,7 +15,7 @@ const CURRENCIES = {
 // Hardcoded PRODUCTS array removed for live-data compliance.
 
 const CATEGORIES = [
-  { id: 'sapphire', name: 'Sapphire', count: 42, emoji: '💎', cls: 'cat--sapphire' },
+  { id: 'sapphire', name: 'Gems', count: 42, emoji: '💎', cls: 'cat--sapphire' },
   { id: 'ruby', name: 'Ruby', count: 18, emoji: '🔴', cls: 'cat--ruby' },
   { id: 'diamond', name: 'Diamond', count: 12, emoji: '✨', cls: 'cat--diamond' },
   { id: 'emerald', name: 'Emerald', count: 15, emoji: '💚', cls: 'cat--emerald' },
@@ -358,7 +358,7 @@ function openDPP(id) {
           <div class="dpp__compliance-val">${d.carbon}</div>
         </div>
         <div class="dpp__compliance-item">
-          <div class="dpp__compliance-key">Internationally Recognized Certificates</div>
+          <div class="dpp__compliance-key">Internationally recognized certificates</div>
           <div class="dpp__compliance-val" style="color:#4ADE80">✓ Yes — LK/2026</div>
         </div>
       </div>
