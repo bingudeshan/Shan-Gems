@@ -124,7 +124,7 @@ function renderCategories() {
       <div class="category-card__overlay">
         <div>
           <div class="category-card__name">${cat.name}</div>
-          <div class="category-card__count">${cat.count} stones available</div>
+          <div class="category-card__count">${state.products.filter(p => p.category === cat.id).length} stones available</div>
         </div>
       </div>
       <div class="category-card__arrow" aria-hidden="true">→</div>
@@ -557,6 +557,7 @@ async function initDataSync() {
     console.error("Fetch error. Database may be offline:", err);
     state.products = [];
   }
+  renderCategories();
   filterProducts(state.activeFilter);
 }
 
