@@ -457,6 +457,65 @@ function initActions() {
     $('openDppModalBtn')?.addEventListener('click', openDppModal);
     $('dppModalClose')?.addEventListener('click', closeDppModal);
     $('dppModalOverlay')?.addEventListener('click', (e) => { if (e.target === $('dppModalOverlay')) closeDppModal(); });
+
+    // Inquiry Modal Handlers
+    $('productInquiryBtn')?.addEventListener('click', openInquiryModal);
+    $('closeInquiryModal')?.addEventListener('click', () => closeModal('inquiryModal'));
+    $('inquiryModalOverlay')?.addEventListener('click', (e) => { if (e.target === $('inquiryModalOverlay')) closeModal('inquiryModal'); });
+    
+    initInquiryForm();
+}
+
+function openInquiryModal() {
+    const p = state.product;
+    if (!p) return;
+
+    // Populate preview
+    const preview = $('inquiryGemPreview');
+    if (preview) {
+        preview.innerHTML = `
+            ${p.image ? `<img src="${p.image}" alt="${p.name}">` : `<div style="font-size: 2rem;">${p.emoji}</div>`}
+            <div>
+                <div class="inquiry-gem-name">${p.name}</div>
+                <div class="inquiry-gem-meta">${p.origin} · ${p.details.split('·')[0].trim()}</div>
+            </div>
+        `;
+    }
+    
+    openModal('inquiryModal');
+}
+
+function initInquiryForm() {
+    const form = $('inquiryForm');
+    if (!form) return;
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const p = state.product;
+        const name = $('inq-name').value.trim();
+        const contact = $('inq-contact').value.trim();
+        const message = $('inq-message').value.trim();
+
+        if (!name || !contact || !message) {
+            toast('Please fill in all required fields.');
+            return;
+        }
+
+        // Construct WhatsApp message
+        const waText = `*Inquiry from Shan Gems Website*%0A%0A` +
+                       `*Gemstone:* ${p.name} (ID: ${p.id})%0A` +
+                       `*Name:* ${name}%0A` +
+                       `*Contact:* ${contact}%0A%0A` +
+                       `*Message:*%0A${message}`;
+
+        const waLink = `https://wa.me/94777866799?text=${encodeURIComponent(waText).replace(/%250A/g, '%0A')}`;
+        
+        window.open(waLink, '_blank');
+        closeModal('inquiryModal');
+        form.reset();
+        toast('Redirecting to WhatsApp...');
+    });
 }
 
 function openDppModal() {
@@ -565,6 +624,7 @@ function initCart() {
     document.addEventListener('keydown', e => {
         if (e.key === 'Escape') {
             closeModal('checkoutModal');
+            closeModal('inquiryModal');
             closeCart();
         }
     });

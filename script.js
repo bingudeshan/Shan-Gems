@@ -481,16 +481,19 @@ function closeModal(id) {
 }
 
 function initModals() {
-  ['dppModal', 'arModal', 'checkoutModal'].forEach(id => {
+  ['dppModal', 'arModal', 'checkoutModal', 'inquiryModal'].forEach(id => {
     const overlay = $(`${id}Overlay`);
+    if (!overlay) return;
     overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(id); });
     overlay.querySelector('.modal__close')?.addEventListener('click', () => closeModal(id));
   });
 
+  $('closeInquiryModal')?.addEventListener('click', () => closeModal('inquiryModal'));
+
   // Escape key
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
-      ['dppModal', 'arModal', 'checkoutModal'].forEach(id => closeModal(id));
+      ['dppModal', 'arModal', 'checkoutModal', 'inquiryModal'].forEach(id => closeModal(id));
       closeCart();
       closeConsult();
     }
@@ -511,8 +514,55 @@ function initConsult() {
   document.addEventListener('click', e => {
     if (!e.target.closest('.consult-widget')) closeConsult();
   });
+  
+  $('openInquiryBtn')?.addEventListener('click', () => {
+    closeConsult();
+    openModal('inquiryModal');
+  });
+
   $$('.consult-popup__action').forEach(btn => {
+    if (btn.id === 'openInquiryBtn') return;
     btn.addEventListener('click', () => { closeConsult(); toast('Connecting you to a gemologist…'); });
+  });
+
+  initInquiryForm();
+}
+
+function initInquiryForm() {
+  const form = $('inquiryForm');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const name = $('inq-name').value.trim();
+    const contact = $('inq-contact').value.trim();
+    const message = $('inq-message').value.trim();
+    const subject = $('inq-subject').value;
+
+    if (!name || !contact || !message) {
+      toast('Please fill in all required fields.');
+      return;
+    }
+
+    // Construct WhatsApp message
+    const waText = `*Inquiry from Shan Gems Website*%0A%0A` +
+                   `*Subject:* ${subject}%0A` +
+                   `*Name:* ${name}%0A` +
+                   `*Contact:* ${contact}%0A%0A` +
+                   `*Message:*%0A${message}`;
+
+    const waLink = `https://wa.me/94777866799?text=${encodeURIComponent(waText).replace(/%250A/g, '%0A')}`;
+    
+    // Attempt to save to DB first (optional feature mentioned in plan)
+    if (typeof saveInquiry === 'function') {
+      saveInquiry({ name, contact, message, subject, source: 'Home Page' });
+    }
+
+    // Open WhatsApp
+    window.open(waLink, '_blank');
+    closeModal('inquiryModal');
+    form.reset();
   });
 }
 

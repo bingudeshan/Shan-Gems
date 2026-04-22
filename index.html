@@ -577,6 +577,49 @@
 
 
 <!-- ═══════════════════════════════════════════════════════
+     INQUIRY FORM MODAL
+═══════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="inquiryModalOverlay" role="dialog" aria-labelledby="inquiryModalTitle" aria-modal="true">
+  <div class="modal inquiry-modal">
+    <div class="modal__header">
+      <h2 class="modal__title" id="inquiryModalTitle">Expert Inquiry</h2>
+      <button class="modal__close" id="closeInquiryModal">✕</button>
+    </div>
+    <div class="modal__body">
+      <p class="inquiry-subtitle">Speak directly with our gemologists for private acquisition, valuation, or rare stone sourcing.</p>
+      
+      <form id="inquiryForm" class="inquiry-form">
+        <input type="hidden" id="inq-subject" value="General Inquiry">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="inq-name">Full Name</label>
+            <input type="text" id="inq-name" class="form-input" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inq-contact">WhatsApp / Phone</label>
+            <input type="text" id="inq-contact" class="form-input" placeholder="+94..." required>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 1rem;">
+          <label class="form-label" for="inq-message">Your Inquiry</label>
+          <textarea id="inq-message" class="form-input" rows="4" placeholder="How can our gemologists assist you today?" required></textarea>
+        </div>
+
+        <div class="inquiry-terms">
+          By submitting this inquiry, you agree to be contacted via WhatsApp or Phone regarding your request.
+        </div>
+
+        <button type="submit" class="btn btn--primary inquiry-submit">
+          SEND INQUIRY VIA WHATSAPP →
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
      CONSULTATION WIDGET
 ═══════════════════════════════════════════════════════ -->
 <div class="consult-widget" aria-label="Expert consultation">
@@ -584,15 +627,15 @@
     <div class="consult-popup__title">Speak to a Gemologist</div>
     <p class="consult-popup__text">Our experts are available for private consultations on five- and six-figure investment gems.</p>
     <div class="consult-popup__actions">
-      <button class="consult-popup__action">
+      <button class="consult-popup__action" id="openInquiryBtn">
+        <span>💬</span> Ask a Question Directly
+      </button>
+      <button class="consult-popup__action" onclick="window.location.href='tel:+94777866799'">
         <span>📞</span> Call +94 777 866 799
       </button>
-      <button class="consult-popup__action">
-        <span>✉</span> Email a Gemologist
-      </button>
-      <button class="consult-popup__action">
-        <span>💬</span> WhatsApp Chat
-      </button>
+      <a class="consult-popup__action" href="https://wa.me/94777866799" target="_blank" style="text-decoration:none; display:flex; align-items:center;">
+        <span>📱</span> WhatsApp Chat
+      </a>
     </div>
   </div>
   <button class="consult-btn" id="consultBtn" aria-label="Open consultation options" aria-haspopup="dialog">
